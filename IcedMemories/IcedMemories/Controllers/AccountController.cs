@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Owin;
 using IcedMemories.Models;
 using IcedMemories.Domain.Models;
+using IcedMemories.Infrastructure;
 
 namespace IcedMemories.Controllers
 {
@@ -18,14 +19,28 @@ namespace IcedMemories.Controllers
   public class AccountController : Controller
   {
     private ApplicationUserManager _userManager;
+    private UnitOfWork _unitOfWork;
 
     public AccountController()
     {
     }
 
-    public AccountController(ApplicationUserManager userManager)
+    public AccountController(ApplicationUserManager userManager, UnitOfWork unitOfWork)
     {
       UserManager = userManager;
+      WorkManager = unitOfWork;
+    }
+
+    public UnitOfWork WorkManager
+    {
+      get
+      {
+        return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<UnitOfWork>();
+      }
+      set
+      {
+        _unitOfWork = value;
+      }
     }
 
     public ApplicationUserManager UserManager
