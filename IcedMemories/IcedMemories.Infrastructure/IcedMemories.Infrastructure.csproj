@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,12 +46,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DbContext.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IcedMemories.Data\IcedMemories.Data.csproj">
+      <Project>{9b088bba-be90-4d00-bcb0-85038492b116}</Project>
+      <Name>IcedMemories.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IcedMemories.Domain\IcedMemories.Domain.csproj">
       <Project>{c02122fb-88d7-4de1-9b62-7dc356ce7d32}</Project>
       <Name>IcedMemories.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcedMemories.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcedMemories.Domain", "IcedMemories.Domain\IcedMemories.Domain.csproj", "{C02122FB-88D7-4DE1-9B62-7DC356CE7D32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcedMemories.Data", "IcedMemories.Data\IcedMemories.Data.csproj", "{9B088BBA-BE90-4D00-BCB0-85038492B116}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C02122FB-88D7-4DE1-9B62-7DC356CE7D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C02122FB-88D7-4DE1-9B62-7DC356CE7D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C02122FB-88D7-4DE1-9B62-7DC356CE7D32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B088BBA-BE90-4D00-BCB0-85038492B116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B088BBA-BE90-4D00-BCB0-85038492B116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B088BBA-BE90-4D00-BCB0-85038492B116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B088BBA-BE90-4D00-BCB0-85038492B116}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
