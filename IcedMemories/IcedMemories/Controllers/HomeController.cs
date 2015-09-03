@@ -13,6 +13,7 @@ namespace IcedMemories.Controllers
       return View();
     }
 
+    [System.Web.Mvc.Route("~/About")]
     public ActionResult About()
     {
       ViewBag.Message = "Your application description page.";
@@ -20,9 +21,10 @@ namespace IcedMemories.Controllers
       return View();
     }
 
+    [System.Web.Mvc.Route("~/Contact")]
     public ActionResult Contact()
     {
-      ViewBag.Message = "Your contact page.";
+      ViewBag.Message = "Iced Memories";
 
       return View();
     }
