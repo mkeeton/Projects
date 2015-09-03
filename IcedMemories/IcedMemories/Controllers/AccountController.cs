@@ -58,6 +58,7 @@ namespace IcedMemories.Controllers
     //
     // GET: /Account/Login
     [AllowAnonymous]
+    [System.Web.Mvc.Route("~/Login")]
     public ActionResult Login(string returnUrl)
     {
       ViewBag.ReturnUrl = returnUrl;
@@ -69,6 +70,7 @@ namespace IcedMemories.Controllers
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
+    [System.Web.Mvc.Route("~/Login")]
     public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
     {
       if (ModelState.IsValid)
@@ -92,6 +94,7 @@ namespace IcedMemories.Controllers
     //
     // GET: /Account/Register
     [AllowAnonymous]
+    [System.Web.Mvc.Route("~/Register")]
     public ActionResult Register()
     {
       return View();
@@ -102,6 +105,7 @@ namespace IcedMemories.Controllers
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
+    [System.Web.Mvc.Route("~/Register")]
     public async Task<ActionResult> Register(RegisterViewModel model)
     {
       if (ModelState.IsValid)
@@ -155,6 +159,7 @@ namespace IcedMemories.Controllers
     //
     // GET: /Account/ForgotPassword
     [AllowAnonymous]
+    [System.Web.Mvc.Route("~/ForgotPassword")]
     public ActionResult ForgotPassword()
     {
       return View();
@@ -165,6 +170,7 @@ namespace IcedMemories.Controllers
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
+    [System.Web.Mvc.Route("~/ForgotPassword")]
     public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
     {
       if (ModelState.IsValid)
