@@ -55,11 +55,18 @@ namespace IcedMemories
             //   appId: "",
             //   appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-              ClientId = "928365693026-r7eoreit3e0fmnknh02ki8ivcf63qdj6.apps.googleusercontent.com",
-              ClientSecret = "zKBFHJptabxBR3-0YbRELa2x"
-            });
+            GoogleOAuth2AuthenticationOptions googleOpt = new GoogleOAuth2AuthenticationOptions();
+            googleOpt.ClientId = "928365693026-r7eoreit3e0fmnknh02ki8ivcf63qdj6.apps.googleusercontent.com";
+            googleOpt.ClientSecret = "zKBFHJptabxBR3-0YbRELa2x";
+            GoogleOAuth2AuthenticationProvider googleProv = new GoogleOAuth2AuthenticationProvider();
+            googleProv.OnAuthenticated = async context =>
+                {
+                  string googleEmailAddress = context.Email;
+                  string googleFirstName = context.GivenName;
+                  string googleLastName = context.FamilyName;
+                };
+            googleOpt.Provider = googleProv;
+            app.UseGoogleAuthentication(googleOpt);
         }
     }
 }

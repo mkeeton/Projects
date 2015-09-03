@@ -363,7 +363,6 @@ namespace IcedMemories.Controllers
       {
         return RedirectToAction("Login");
       }
-
       // Sign in the user with this external login provider if the user already has a login
       var user = await UserManager.FindAsync(loginInfo.Login);
       if (user != null)
@@ -373,11 +372,55 @@ namespace IcedMemories.Controllers
       }
       else
       {
-        // If the user does not have an account, then prompt the user to create an account
-        ViewBag.ReturnUrl = returnUrl;
-        ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-        return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+ 
+        var newUser = await WorkManager.UserManager.FindByEmailAsync(loginInfo.Email);
+        bool _found=false;;
+        IdentityResult result;
+        if(newUser==null)
+        {
+          _found = false;
+          newUser = new User() { UserName = loginInfo.Email, Email = loginInfo.Email };
+          foreach (Claim cl in loginInfo.ExternalIdentity.Claims)
+          {
+            if(cl.Type.ToLower().IndexOf("givenname")>-1)
+            {
+              newUser.FirstName = cl.Value;
+            }
+            if (cl.Type.ToLower().IndexOf("surname") > -1)
+            {
+              newUser.LastName = cl.Value;
+            }
+          }
+          result = await UserManager.CreateAsync(newUser);
+        }
+        else
+        {
+          _found = true;
+          result=new IdentityResult("Existing User Found");
+        }
+        if ((newUser!=null)&&((_found==true)||(result.Succeeded)))
+        {
+          result = await UserManager.AddLoginAsync(newUser.Id, loginInfo.Login);
+          if (result.Succeeded)
+          {
+            await SignInAsync(newUser, isPersistent: false);
+
+            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+            // Send an email with this link
+            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+            // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
+
+            return RedirectToLocal(returnUrl);
+          }
+        }
+        
+        //// If the user does not have an account, then prompt the user to create an account
+        //ViewBag.ReturnUrl = returnUrl;
+        //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+        //return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
       }
+      return View("ExternalLoginFailure");
     }
 
     //

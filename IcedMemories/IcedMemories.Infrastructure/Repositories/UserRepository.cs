@@ -43,7 +43,7 @@ namespace IcedMemories.Infrastructure.Repositories
       {
         user.Id = Guid.NewGuid();
         using (IDbConnection connection = CurrentContext.OpenConnection())
-          connection.Execute("insert into auth_Users(Id, UserName, PasswordHash, SecurityStamp, Email, EmailConfirmed) values(@Id, @userName, @passwordHash, @securityStamp, @email, @emailConfirmed)", user);
+          connection.Execute("insert into auth_Users(Id, UserName, PasswordHash, SecurityStamp, Email, EmailConfirmed, FirstName, LastName) values(@Id, @userName, @passwordHash, @securityStamp, @email, @emailConfirmed, @FirstName, @LastName)", user);
       });
     }
 
@@ -91,7 +91,7 @@ namespace IcedMemories.Infrastructure.Repositories
       return Task.Factory.StartNew(() =>
       {
         using (IDbConnection connection = CurrentContext.OpenConnection())
-          connection.Execute("update auth_Users set UserName = @userName, PasswordHash = @passwordHash, SecurityStamp = @securityStamp where Id = @Id", user);
+          connection.Execute("update auth_Users set UserName = @userName, PasswordHash = @passwordHash, SecurityStamp = @securityStamp, FirstName=@FirstName, LastName=@LastName where Id = @Id", user);
       });
     }
     #endregion
@@ -150,7 +150,7 @@ namespace IcedMemories.Infrastructure.Repositories
       {
         using (IDbConnection connection = CurrentContext.OpenConnection())
           connection.Execute("delete from auth_ExternalLogins where UserId = @userId and LoginProvider = @loginProvider and ProviderKey = @providerKey",
-              new { user.Id, login.LoginProvider, login.ProviderKey });
+              new { userId=user.Id, login.LoginProvider, login.ProviderKey });
       });
     }
     #endregion
