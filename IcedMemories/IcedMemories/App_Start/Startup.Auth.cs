@@ -55,11 +55,11 @@ namespace IcedMemories
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+              ClientId = "928365693026-r7eoreit3e0fmnknh02ki8ivcf63qdj6.apps.googleusercontent.com",
+              ClientSecret = "zKBFHJptabxBR3-0YbRELa2x"
+            });
         }
     }
 }

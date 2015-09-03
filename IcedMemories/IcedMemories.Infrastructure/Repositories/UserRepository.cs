@@ -121,7 +121,7 @@ namespace IcedMemories.Infrastructure.Repositories
       return Task.Factory.StartNew(() =>
       {
         using (IDbConnection connection = CurrentContext.OpenConnection())
-          return connection.Query<User>("select u.* from Users u inner join auth_ExternalLogins l on l.UserId = u.Id where l.LoginProvider = @loginProvider and l.ProviderKey = @providerKey",
+          return connection.Query<User>("select u.* from auth_Users u inner join auth_ExternalLogins l on l.UserId = u.Id where l.LoginProvider = @loginProvider and l.ProviderKey = @providerKey",
               login).SingleOrDefault();
       });
     }

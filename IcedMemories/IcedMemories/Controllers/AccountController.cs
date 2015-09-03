@@ -427,9 +427,21 @@ namespace IcedMemories.Controllers
         {
           return View("ExternalLoginFailure");
         }
-        var user = new User() { UserName = model.Email, Email = model.Email };
-        IdentityResult result = await UserManager.CreateAsync(user);
-        if (result.Succeeded)
+        var user = await WorkManager.UserManager.FindByEmailAsync(model.Email);
+        bool _found=false;;
+        IdentityResult result;
+        if(user==null)
+        {
+          _found = false;
+          user = new User() { UserName = model.Email, Email = model.Email };
+          result = await UserManager.CreateAsync(user);
+        }
+        else
+        {
+          _found = true;
+          result=new IdentityResult("Existing User Found");
+        }
+        if ((user!=null)&&((_found==true)||(result.Succeeded)))
         {
           result = await UserManager.AddLoginAsync(user.Id, info.Login);
           if (result.Succeeded)
