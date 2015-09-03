@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Cakes";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Cakes</h2>
+
+<table>
+  <tr>
+    <th>Date Added</th>
+    <th>Title</th>
+  </tr>
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @item.DateAdded
+      </td>
+      <td>
+        @item.Title
+      </td>
+    </tr>  
+  }
+</table>

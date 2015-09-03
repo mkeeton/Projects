@@ -13,6 +13,7 @@ namespace IcedMemories.Infrastructure
   {
     private IDbContext _dbContext;
     private UserRepository<User> _userRepository;
+    private CakeRepository _cakeRepository;
 
     public static UnitOfWork Create()
     {
@@ -81,6 +82,22 @@ namespace IcedMemories.Infrastructure
       private set
       {
         _userRepository = value;
+      }
+    }
+
+    public CakeRepository CakeManager
+    {
+      get
+      {
+        if (_cakeRepository == null)
+        {
+          _cakeRepository = new CakeRepository(_dbContext);
+        }
+        return _cakeRepository;
+      }
+      private set
+      {
+        _cakeRepository = value;
       }
     }
 
