@@ -66,6 +66,29 @@ namespace IcedMemories
     }
   }
 
+  public class ApplicationRoleManager : RoleManager<Role, System.Guid>
+  {
+    public ApplicationRoleManager(IRoleStore<Role, System.Guid> store)
+      : base(store)
+    {
+    }
+
+    //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(User user)
+    //{
+    //  // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+    //  var userIdentity = await CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+    //  // Add custom user claims here
+    //  return userIdentity;
+    //}
+
+    public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+    {
+      var manager = new ApplicationRoleManager(context.Get<UnitOfWork>().RoleManager);
+      // Configure validation logic for usernames
+      return manager;
+    }
+  }
+
   public class EmailService : IIdentityMessageService
   {
     public Task SendAsync(IdentityMessage message)

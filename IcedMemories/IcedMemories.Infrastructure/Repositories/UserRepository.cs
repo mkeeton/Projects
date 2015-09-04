@@ -11,7 +11,7 @@ using IcedMemories.Domain.Models;
 
 namespace IcedMemories.Infrastructure.Repositories
 {
-  public class UserRepository<T> : IUserStore<User, Guid>, IUserLoginStore<User, Guid>, IUserPasswordStore<User, Guid>, IUserSecurityStampStore<User, Guid>, IUserEmailStore<User, Guid>
+  public class UserRepository<T> : IUserStore<User, Guid>, IUserLoginStore<User, Guid>, IUserPasswordStore<User, Guid>, IUserSecurityStampStore<User, Guid>, IUserEmailStore<User, Guid>, IUserRoleStore<User,Guid>
   {
     private readonly IDbContext CurrentContext;
 
@@ -202,6 +202,89 @@ namespace IcedMemories.Infrastructure.Repositories
 
     #endregion
 
+    #region IUserRoleStore
+
+    public async Task AddToRoleAsync(User user, string roleName)
+    {
+      if (user == null)
+        throw new ArgumentNullException("user");
+
+      Role _role = null;
+      await Task.Factory.StartNew(() =>
+      {
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          _role = connection.Query<Role>("select * FROM auth_Roles WHERE Name LIKE @roleName", new { roleName=roleName }).FirstOrDefault<Role>();
+      });
+      if(_role!= null)
+      {
+        await Task.Factory.StartNew(() =>
+        {
+          using (IDbConnection connection = CurrentContext.OpenConnection())
+            connection.Execute("INSERT INTO auth_UserRoles(UserId, RoleId) VALUES(@userId, @roleId)", new { Id = Guid.NewGuid(), userId = user.Id, roleId = _role.Id });
+        });
+      }
+      return;
+    }
+
+    public virtual Task<System.Collections.Generic.IList<string>> GetRolesAsync(User user)
+    {
+      //if (user==null)
+      //  throw new ArgumentNullException("user");
+      //IList<string> _return = null;
+      //await Task.Factory.StartNew(() =>
+      //{
+      //  using (IDbConnection connection = CurrentContext.OpenConnection())
+      //    _return = connection.Query<string>("select R.Name from auth_UserRoles UR INNER JOIN auth_Roles R ON UR.RoleId=R.Id WHERE UR.UserId=@userId", new { userId = user.Id }).ToList<string>();
+      //});
+      //return _return;
+      return GetRolesAsync(user.Id);
+    }
+
+    public virtual Task<System.Collections.Generic.IList<string>> GetRolesAsync(Guid userId)
+    {
+      if (userId == Guid.Empty)
+        throw new ArgumentNullException("userId");
+      return Task.Factory.StartNew(() =>
+      {
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+         return (IList<string>)connection.Query<string>("select R.Name from auth_UserRoles UR INNER JOIN auth_Roles R ON UR.RoleId=R.Id WHERE UR.UserId=@Id", new { Id = userId }).ToList<string>();
+      });
+    }
+
+    public Task<bool> IsInRoleAsync(User user, string roleName)
+    {
+      if (string.IsNullOrWhiteSpace(roleName))
+        throw new ArgumentNullException("roleName");
+
+      List<Guid> _userRoles = null;
+
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          _userRoles = connection.Query<Guid>("select UR.ID from auth_UserRoles UR INNER JOIN auth_Roles R ON UR.RoleId=R.Id WHERE UR.UserId=@userId AND R.Name LIKE @roleName", new { userId = user.Id, roleName = roleName }).ToList<Guid>();
+      bool _return = false;
+      if(_userRoles.Count>0)
+      {
+        _return = true;
+      }
+      return Task.Factory.StartNew(() =>
+      {
+        return _return;
+      });
+    }
+
+    public Task RemoveFromRoleAsync(User user, string roleName)
+    {
+      if (user == null)
+        throw new ArgumentNullException("user");
+
+      
+      return Task.Factory.StartNew(() =>
+      {
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          connection.Execute("delete from auth_UserRoles where UserId = @Id AND RoleId IN (SELECT Id FROM auth_Roles WHERE Name LIKE @roleName)", new { Id=user.Id, roleName=roleName });
+      });
+    }
+
+    #endregion
     public Task<User> FindByEmailAsync(string email)
     {
       if (string.IsNullOrWhiteSpace(email))

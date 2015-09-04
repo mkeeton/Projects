@@ -13,6 +13,7 @@ namespace IcedMemories.Infrastructure
   {
     private IDbContext _dbContext;
     private UserRepository<User> _userRepository;
+    private RoleRepository<Role> _roleRepository;
     private CakeRepository _cakeRepository;
 
     public static UnitOfWork Create()
@@ -82,6 +83,22 @@ namespace IcedMemories.Infrastructure
       private set
       {
         _userRepository = value;
+      }
+    }
+
+    public RoleRepository<Role> RoleManager
+    {
+      get
+      {
+        if (_roleRepository == null)
+        {
+          _roleRepository = new RoleRepository<Role>(_dbContext);
+        }
+        return _roleRepository;
+      }
+      private set
+      {
+        _roleRepository = value;
       }
     }
 

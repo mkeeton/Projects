@@ -23,6 +23,7 @@ namespace IcedMemories
           app.CreatePerOwinContext<UnitOfWork>(UnitOfWork.Create);
           app.CreatePerOwinContext<App_Start.OwinSettings>(App_Start.OwinSettings.Create);
           app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+          app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
           // Enable the application to use a cookie to store information for the signed in user
           // and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -30,7 +31,7 @@ namespace IcedMemories
           app.UseCookieAuthentication(new CookieAuthenticationOptions
           {
             AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-            LoginPath = new PathString("/Account/Login"),
+            LoginPath = new PathString("/Login"),
             Provider = new CookieAuthenticationProvider
             {
               OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, User, Guid>(

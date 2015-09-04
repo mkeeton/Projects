@@ -33,6 +33,7 @@ namespace IcedMemories.Controllers
             return View();
         }
 
+        [Authorize(Roles="Admin")]
         public async Task<ActionResult> Cakes()
         {
           return View(await WorkManager.CakeManager.GetCakesAsync());
