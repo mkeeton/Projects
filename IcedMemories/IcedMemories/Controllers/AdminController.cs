@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using IcedMemories.Infrastructure;
+using AutoMapper;
 
 namespace IcedMemories.Controllers
 {
@@ -36,7 +37,13 @@ namespace IcedMemories.Controllers
         [Authorize(Roles="Admin")]
         public async Task<ActionResult> Cakes()
         {
-          return View(await WorkManager.CakeManager.GetCakesAsync());
+
+          return View(Mapper.Map < IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel> > (await WorkManager.CakeManager.GetCakesAsync()));
+        }
+
+        public ActionResult CakeDetails()
+        {
+          return PartialView("CakeDetailsPartial");
         }
     }
 }

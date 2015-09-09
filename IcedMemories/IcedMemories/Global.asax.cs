@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using IcedMemories.Infrastructure;
+using AutoMapper;
 
 namespace IcedMemories
 {
@@ -25,6 +26,10 @@ namespace IcedMemories
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Mapper.Initialize(cfg =>
+            {
+              cfg.CreateMap<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>();
+            });
         }
 
         //protected void Application_OnAuthenticateRequest(Object src, EventArgs e)

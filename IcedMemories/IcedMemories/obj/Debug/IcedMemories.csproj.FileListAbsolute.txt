@@ -62,3 +62,5 @@ C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Dapper.
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\IcedMemories.Data.pdb
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Dapper.pdb
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Dapper.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\AutoMapper.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\AutoMapper.xml
