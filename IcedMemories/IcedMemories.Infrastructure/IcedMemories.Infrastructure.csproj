@@ -49,6 +49,9 @@
     <Compile Include="Repositories\CakeRepository.cs" />
     <Compile Include="Repositories\DbContext.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\SearchCategoryOptionRepository.cs" />
+    <Compile Include="Repositories\SearchCategoryRepository.cs" />
+    <Compile Include="Repositories\SearchCategorySelectionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

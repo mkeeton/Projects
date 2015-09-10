@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace IcedMemories.Models
 {
@@ -29,5 +30,7 @@ namespace IcedMemories.Models
     [DataType(DataType.Upload)]
     [Display(Name = "Cake Image")]
     public HttpPostedFileBase ImageUpload { get; set; }
+
+    public IList<SearchCategorySelection> Categories { get; set;}
   }
 }

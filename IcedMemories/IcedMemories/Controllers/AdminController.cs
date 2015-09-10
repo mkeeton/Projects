@@ -44,7 +44,11 @@ namespace IcedMemories.Controllers
         [HttpGet]
         public async Task<ActionResult> CakeDetails(Guid id)
         {
-          return PartialView("CakeDetailsPartial", Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id)));
+          Models.CakeViewModel _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id));
+          _cake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
+          IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
+          
+          return PartialView("CakeDetailsPartial", _cake);
         }
 
         [HttpPost]

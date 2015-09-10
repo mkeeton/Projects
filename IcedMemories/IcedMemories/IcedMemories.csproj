@@ -172,6 +172,8 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CakeViewModel.cs" />
+    <Compile Include="Models\SearchCategoryOptionSelection.cs" />
+    <Compile Include="Models\SearchCategorySelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

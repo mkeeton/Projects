@@ -15,6 +15,9 @@ namespace IcedMemories.Infrastructure
     private UserRepository<User> _userRepository;
     private RoleRepository<Role> _roleRepository;
     private CakeRepository _cakeRepository;
+    private SearchCategoryRepository _categoryRepository;
+    private SearchCategoryOptionRepository _categoryOptionRepository;
+    private SearchCategorySelectionRepository _categoryOptionSelectionRepository;
 
     public static UnitOfWork Create()
     {
@@ -115,6 +118,54 @@ namespace IcedMemories.Infrastructure
       private set
       {
         _cakeRepository = value;
+      }
+    }
+
+    public SearchCategoryRepository SearchCategoryManager
+    {
+      get
+      {
+        if (_categoryRepository == null)
+        {
+          _categoryRepository = new SearchCategoryRepository(_dbContext);
+        }
+        return _categoryRepository;
+      }
+      private set
+      {
+        _categoryRepository = value;
+      }
+    }
+
+    public SearchCategoryOptionRepository SearchCategoryOptionManager
+    {
+      get
+      {
+        if (_categoryOptionRepository == null)
+        {
+          _categoryOptionRepository = new SearchCategoryOptionRepository(_dbContext);
+        }
+        return _categoryOptionRepository;
+      }
+      private set
+      {
+        _categoryOptionRepository = value;
+      }
+    }
+
+    public SearchCategorySelectionRepository SearchCategorySelectionManager
+    {
+      get
+      {
+        if (_categoryOptionSelectionRepository == null)
+        {
+          _categoryOptionSelectionRepository = new SearchCategorySelectionRepository(_dbContext);
+        }
+        return _categoryOptionSelectionRepository;
+      }
+      private set
+      {
+        _categoryOptionSelectionRepository = value;
       }
     }
 
