@@ -1,4 +1,5 @@
-﻿@model IcedMemories.Models.CakeViewModel
+﻿@using IcedMemories.Helpers
+@model IcedMemories.Models.CakeViewModel
 
 <div class="modal-body">
 
@@ -7,7 +8,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-      <h4>CakeViewModel</h4>
+      <h4>Cake Details</h4>
       <hr />
       @Html.ValidationSummary(true, "", new { @class = "text-danger" })
       @Html.HiddenFor(model => model.Id)
@@ -15,8 +16,7 @@
       <div class="form-group">
         @Html.LabelFor(model => model.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-          @Html.EditorFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control" } })
-          @Html.ValidationMessageFor(model => model.DateAdded, "", new { @class = "text-danger" })
+          @Html.DisplayFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control" } })
         </div>
       </div>
 
@@ -36,6 +36,13 @@
         </div>
       </div>
 
+      <div class="form-group">
+        @Html.LabelFor(model => model.ImageUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+          @Html.ImageFor(model => model.ImageURL, new { alt=Model.Title})
+          @Html.TextBoxFor(model => model.ImageUpload, new { type = "file", name = "Files" })
+        </div>
+      </div>
       <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
           <input type="submit" value="Save" class="btn btn-default" />

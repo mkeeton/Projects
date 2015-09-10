@@ -41,9 +41,9 @@ namespace IcedMemories.Controllers
           return View(Mapper.Map < IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel> > (await WorkManager.CakeManager.GetCakesAsync()));
         }
 
-        public ActionResult CakeDetails()
+        public async Task<ActionResult> CakeDetails(Guid id)
         {
-          return PartialView("CakeDetailsPartial");
+          return PartialView("CakeDetailsPartial", Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id)));
         }
     }
 }

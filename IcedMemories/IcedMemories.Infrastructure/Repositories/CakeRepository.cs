@@ -42,5 +42,17 @@ namespace IcedMemories.Infrastructure.Repositories
       });
     }
 
+    public virtual Task<Cake> LoadAsync(Guid cakeId)
+    {
+      if (cakeId == Guid.Empty)
+        throw new ArgumentNullException("cakeId");
+
+      return Task.Factory.StartNew(() =>
+      {
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          return connection.Query<Cake>("select * from app_Cakes where Id = @Id", new { Id = cakeId }).SingleOrDefault();
+      });
+    }
+
   }
 }
