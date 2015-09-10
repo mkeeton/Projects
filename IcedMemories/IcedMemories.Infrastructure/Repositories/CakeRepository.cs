@@ -54,5 +54,43 @@ namespace IcedMemories.Infrastructure.Repositories
       });
     }
 
+    public Task SaveAsync(Cake cake)
+    {
+      if(cake.Id==Guid.Empty)
+      {
+        return CreateAsync(cake);
+      }
+      else
+      {
+        return UpdateAsync(cake);
+      }
+    }
+
+    public Task CreateAsync(Cake cake)
+    {
+      if (cake == null)
+        throw new ArgumentNullException("cake");
+
+      return Task.Factory.StartNew(() =>
+      {
+        cake.Id = Guid.NewGuid();
+        cake.DateAdded = System.DateTime.Now;
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          connection.Execute("insert into app_Cakes(Id, DateAdded, Title, Description, ImageLink) values(@Id, @DateAdded, @Title, @Description, @ImageLink)", cake);
+      });
+    }
+
+    public Task UpdateAsync(Cake cake)
+    {
+      if (cake == null)
+        throw new ArgumentNullException("cake");
+
+      return Task.Factory.StartNew(() =>
+      {
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          connection.Execute("update app_Cakes SET Title=@Title, Description=@Description, ImageLink=@ImageLink where Id = @Id", cake);
+      });
+    }
+
   }
 }

@@ -24,7 +24,7 @@ namespace IcedMemories.Models
 
     [DataType(DataType.ImageUrl)]
     [Display(Name = "Image")]
-    public String ImageURL { get; set; }
+    public String ImageLink { get; set; }
 
     [DataType(DataType.Upload)]
     [Display(Name = "Cake Image")]

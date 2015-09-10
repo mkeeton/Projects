@@ -232,7 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\Cakes\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

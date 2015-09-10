@@ -41,9 +41,30 @@ namespace IcedMemories.Controllers
           return View(Mapper.Map < IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel> > (await WorkManager.CakeManager.GetCakesAsync()));
         }
 
+        [HttpGet]
         public async Task<ActionResult> CakeDetails(Guid id)
         {
           return PartialView("CakeDetailsPartial", Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id)));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CakeDetails(Models.CakeViewModel model)
+        {
+          IcedMemories.Domain.Models.Cake _cake = await WorkManager.CakeManager.LoadAsync(model.Id);
+          if(_cake == null)
+          {
+            _cake = new Domain.Models.Cake();
+          }
+          _cake.Title = model.Title;
+          _cake.Description = model.Description;
+          if (model.ImageUpload != null)
+          {
+            String _imagePath = "/Images/Cakes/" + Guid.NewGuid().ToString() + ".jpg";
+            model.ImageUpload.SaveAs(Server.MapPath(_imagePath));
+            _cake.ImageLink = _imagePath;
+          }
+          await WorkManager.CakeManager.SaveAsync(_cake);
+          return PartialView("CakeDetailsPartial", Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(_cake));
         }
     }
 }

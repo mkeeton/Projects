@@ -12,6 +12,6 @@ namespace IcedMemories.Domain.Models
     public DateTime DateAdded {get; set;}
     public String Title { get; set;}
     public String Description { get; set;}
-    public String ImageURL { get; set; }
+    public String ImageLink { get; set; }
   }
 }

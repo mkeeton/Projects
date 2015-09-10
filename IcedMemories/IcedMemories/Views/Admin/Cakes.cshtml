@@ -59,7 +59,7 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
+            @Html.DisplayNameFor(model => model.ImageLink)
         </th>
         <th></th>
     </tr>
@@ -76,7 +76,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.Image(item.ImageURL,item.Title,"","")
+            @Html.Image(item.ImageLink,item.Title,"","")
         </td>
         <td>
             @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @class = "modal-link btn btn-success" })|
