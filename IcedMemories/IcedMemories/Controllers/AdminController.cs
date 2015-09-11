@@ -91,7 +91,34 @@ namespace IcedMemories.Controllers
             _cake.ImageLink = _imagePath;
           }
           await WorkManager.CakeManager.SaveAsync(_cake);
-          return PartialView("CakeDetailsPartial", Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(_cake));
+          Models.CakeViewModel _returnCake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(_cake);
+          try
+          {
+            _returnCake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
+            IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
+            IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await WorkManager.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
+            foreach (Models.SearchCategorySelection _category in _returnCake.Categories)
+            {
+              _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+              foreach (IcedMemories.Domain.Models.SearchCategorySelection _selection in _selections)
+              {
+                foreach (Models.SearchCategoryOptionSelection _option in _category.Options)
+                {
+                  if (_option.Id == _selection.CategoryOptionId)
+                  {
+                    _option.SelectionId = _selection.Id;
+                    _option.Selected = true;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+          catch (Exception ex)
+          {
+
+          }
+          return PartialView("CakeDetailsPartial", _returnCake);
         }
     }
 }
