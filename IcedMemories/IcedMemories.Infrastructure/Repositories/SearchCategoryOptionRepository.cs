@@ -32,13 +32,13 @@ namespace IcedMemories.Infrastructure.Repositories
 
     }
 
-    public virtual Task<IList<SearchCategoryOption>> GetCategoryOptionsAsync()
+    public virtual Task<IList<SearchCategoryOption>> GetCategoryOptionsAsync(Guid categoryId)
     {
 
       return Task.Factory.StartNew(() =>
       {
         using (IDbConnection connection = CurrentContext.OpenConnection())
-          return (IList<SearchCategoryOption>)connection.Query<SearchCategoryOption>("select * FROM app_SearchCategoryOptions ORDER BY Name", new { }).ToList();
+          return (IList<SearchCategoryOption>)connection.Query<SearchCategoryOption>("select * FROM app_SearchCategoryOptions WHERE CategoryId=@CategoryId ORDER BY Name", new { Categoryid=categoryId}).ToList();
       });
     }
 

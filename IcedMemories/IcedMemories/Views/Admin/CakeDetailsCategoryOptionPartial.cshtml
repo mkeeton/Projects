@@ -1,0 +1,6 @@
+﻿@using IcedMemories.Helpers
+@model IcedMemories.Models.SearchCategoryOptionSelection
+@using (Html.BeginCollectionItem("Options"))
+{
+<li>@Html.HiddenFor(model => model.Id)@Html.HiddenFor(model => model.SelectionId)@Html.CheckBoxFor(model => model.Selected)@Html.DisplayFor(model => model.Name)</li>
+}

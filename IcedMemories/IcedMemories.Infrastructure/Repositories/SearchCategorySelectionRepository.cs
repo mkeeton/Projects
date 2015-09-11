@@ -42,6 +42,16 @@ namespace IcedMemories.Infrastructure.Repositories
       });
     }
 
+    public virtual Task<IList<SearchCategorySelection>> GetCategorySelectionsForCakeAsync(Guid cakeId)
+    {
+
+      return Task.Factory.StartNew(() =>
+      {
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          return (IList<SearchCategorySelection>)connection.Query<SearchCategorySelection>("select * FROM app_SearchCategorySelections WHERE CakeId=@CakeId", new {CakeId=cakeId }).ToList();
+      });
+    }
+
     public virtual Task<SearchCategorySelection> LoadAsync(Guid categorySelectionId)
     {
       if (categorySelectionId == Guid.Empty)

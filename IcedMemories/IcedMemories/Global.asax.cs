@@ -29,6 +29,8 @@ namespace IcedMemories
             Mapper.Initialize(cfg =>
             {
               cfg.CreateMap<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>();
+              cfg.CreateMap<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>();
+              cfg.CreateMap<IcedMemories.Domain.Models.SearchCategoryOption, Models.SearchCategoryOptionSelection>();
             });
         }
 

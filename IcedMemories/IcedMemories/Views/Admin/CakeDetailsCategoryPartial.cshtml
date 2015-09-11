@@ -1,0 +1,14 @@
+﻿@using IcedMemories.Helpers
+@model IcedMemories.Models.SearchCategorySelection
+@using (Html.BeginCollectionItem("Categories"))
+{
+  <li>
+    @Html.HiddenFor(model => model.Id)@Html.DisplayFor(model => model.Name)
+    <ul>
+      @foreach (var modelItem in Model.Options)
+      {
+        Html.RenderPartial("CakeDetailsCategoryOptionPartial", modelItem);
+      }
+    </ul>
+  </li>
+}

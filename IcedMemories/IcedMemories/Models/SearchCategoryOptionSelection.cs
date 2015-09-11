@@ -7,8 +7,9 @@ namespace IcedMemories.Models
 {
   public class SearchCategoryOptionSelection
   {
-    Guid Id { get; set;}
-    String Name { get; set;}
-    Guid SelectionId { get; set;}
+    public Guid Id { get; set;}
+    public String Name { get; set;}
+    public bool Selected { get; set;}
+    public Guid SelectionId { get; set;}
   }
 }

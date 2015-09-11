@@ -71,6 +71,12 @@
             <input type="submit" value="Save" class="btn btn-default modal-submission" />
           </div>
         </div>
+      <ul>
+        @foreach (var item in Model.Categories)
+        {
+          Html.RenderPartial("CakeDetailsCategoryPartial", item);
+        }
+      </ul>
       </div>
   }
 

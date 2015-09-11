@@ -45,9 +45,32 @@ namespace IcedMemories.Controllers
         public async Task<ActionResult> CakeDetails(Guid id)
         {
           Models.CakeViewModel _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id));
+          try
+          { 
           _cake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
           IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
-          
+          IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await WorkManager.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
+          foreach(Models.SearchCategorySelection _category in _cake.Categories)
+          {
+            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+            foreach(IcedMemories.Domain.Models.SearchCategorySelection _selection in _selections)
+            {
+              foreach(Models.SearchCategoryOptionSelection _option in _category.Options)
+              {
+                if(_option.Id == _selection.CategoryOptionId)
+                {
+                  _option.SelectionId = _selection.Id;
+                  _option.Selected = true;
+                  break;
+                }
+              }
+            }
+          }
+          }
+          catch(Exception ex)
+          {
+
+          }
           return PartialView("CakeDetailsPartial", _cake);
         }
 
