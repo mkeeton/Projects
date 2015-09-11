@@ -91,6 +91,29 @@ namespace IcedMemories.Controllers
             _cake.ImageLink = _imagePath;
           }
           await WorkManager.CakeManager.SaveAsync(_cake);
+          foreach(Models.SearchCategorySelection _sCat in model.Categories)
+          {
+            foreach(Models.SearchCategoryOptionSelection _sOption in _sCat.Options)
+            {
+              if(_sOption.Selected==true)
+              {
+                if(_sOption.SelectionId==Guid.Empty)
+                {
+                  IcedMemories.Domain.Models.SearchCategorySelection _newSelection = new Domain.Models.SearchCategorySelection();
+                  _newSelection.CakeId = _cake.Id;
+                  _newSelection.CategoryOptionId = _sOption.Id;
+                  await WorkManager.SearchCategorySelectionManager.SaveAsync(_newSelection);
+                }
+              }
+              else
+              {
+                if(_sOption.SelectionId!=Guid.Empty)
+                {
+                  await WorkManager.SearchCategorySelectionManager.DeleteAsync(_sOption.SelectionId);
+                }
+              }
+            }
+          }
           Models.CakeViewModel _returnCake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(_cake);
           try
           {
@@ -119,6 +142,19 @@ namespace IcedMemories.Controllers
 
           }
           return PartialView("CakeDetailsPartial", _returnCake);
+        }
+
+        [Authorize(Roles="Admin")]
+        public async Task<ActionResult> Categories()
+        {
+
+          return View(Mapper.Map < IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection> > (await WorkManager.SearchCategoryManager.GetCategoriesAsync()));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> CategoryDetails(Guid id)
+        {
+          return PartialView("CategoryDetailsPartial");
         }
     }
 }

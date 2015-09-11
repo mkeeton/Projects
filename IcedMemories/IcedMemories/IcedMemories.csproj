@@ -234,6 +234,9 @@
     <Content Include="Views\Admin\Cakes.cshtml" />
     <Content Include="Views\Admin\CakeDetailsCategoryPartial.cshtml" />
     <Content Include="Views\Admin\CakeDetailsCategoryOptionPartial.cshtml" />
+    <Content Include="Views\Admin\Categories.cshtml" />
+    <Content Include="Views\Admin\CategoryDetailsPartial.cshtml" />
+    <Content Include="Views\Admin\CategoryOptionsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
