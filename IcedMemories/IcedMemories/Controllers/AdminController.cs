@@ -31,7 +31,7 @@ namespace IcedMemories.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Cakes");
         }
 
         [Authorize(Roles="Admin")]
@@ -154,7 +154,49 @@ namespace IcedMemories.Controllers
         [HttpGet]
         public async Task<ActionResult> CategoryDetails(Guid id)
         {
-          return PartialView("CategoryDetailsPartial");
+          Models.SearchCategorySelection _category = Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(await WorkManager.SearchCategoryManager.LoadAsync(id));
+          try
+          {
+            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+          }
+          catch (Exception ex)
+          {
+
+          }
+          return PartialView("CategoryDetailsPartial",_category);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CategoryDetails(Models.SearchCategorySelection model)
+        {
+          IcedMemories.Domain.Models.SearchCategory _category = await WorkManager.SearchCategoryManager.LoadAsync(model.Id);
+          if (_category == null)
+          {
+            _category = new Domain.Models.SearchCategory();
+          }
+          _category.Name = model.Name;
+          await WorkManager.SearchCategoryManager.SaveAsync(_category);
+          foreach(Models.SearchCategoryOptionSelection _cOption in model.Options)
+          {
+            IcedMemories.Domain.Models.SearchCategoryOption _option = await WorkManager.SearchCategoryOptionManager.LoadAsync(_cOption.Id);
+            if(_option==null)
+            {
+              _option = new IcedMemories.Domain.Models.SearchCategoryOption();
+              _option.CategoryId = _category.Id;
+            }
+            _option.Name = _cOption.Name;
+            await WorkManager.SearchCategoryOptionManager.SaveAsync(_option);
+          }
+          Models.SearchCategorySelection _returnCategory = Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(_category);
+          try
+          { 
+            _returnCategory.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_returnCategory.Id));
+          }
+          catch(Exception ex)
+          {
+
+          }
+          return PartialView("CategoryDetailsPartial", _returnCategory);
         }
     }
 }
