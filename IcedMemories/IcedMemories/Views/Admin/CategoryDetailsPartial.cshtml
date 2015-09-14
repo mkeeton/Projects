@@ -1,36 +1,64 @@
 ﻿@model IcedMemories.Models.SearchCategorySelection
 
+<script type="text/javascript">
+  $('#CategoryDetails').submit(function (e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+      url: '/Admin/CategoryDetails',
+      type: 'POST',
+      cache: false,
+      contentType: false,
+      processData: false,
+      enctype: 'multipart/form-data',
+      data: formData,
+      success: function (data) {
+        $("#modal-container").load('@(Url.Action("CategoryDetails","Admin",null, Request.Url.Scheme))');
+      }
+    });
+  });
 
-@using (Html.BeginForm())
-{
+</script>
+
+<div class="modal-body">
+  @using (Html.BeginForm("CategoryDetails", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", name = "CategoryDetails", id = "CategoryDetails" }))
+  {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>SearchCategorySelection</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+      <h4>Category</h4>
+      <hr />
+      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+      @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
+      <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+          @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+          @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
+      </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+      <table>
+        @foreach (var item in Model.Options)
+        {
+          Html.RenderPartial("CategoryOptionsPartial", item);
+        }
+      </table>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <input type="submit" value="Save" class="btn btn-default" />
         </div>
+      </div>
     </div>
-}
+  }
 
-<div>
+  <div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+  </div>
 
-@section Scripts {
+  @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+  }
+</div>

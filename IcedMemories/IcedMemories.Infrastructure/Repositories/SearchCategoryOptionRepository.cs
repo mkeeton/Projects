@@ -107,7 +107,7 @@ namespace IcedMemories.Infrastructure.Repositories
       return Task.Factory.StartNew(() =>
       {
         using (IDbConnection connection = CurrentContext.OpenConnection())
-          connection.Execute("update app_SearchCategoriyOptions SET CategoryId=@CategoryId, Name=@Name where Id = @Id", categoryOption);
+          connection.Execute("update app_SearchCategoryOptions SET CategoryId=@CategoryId, Name=@Name where Id = @Id", categoryOption);
       });
     }
   }

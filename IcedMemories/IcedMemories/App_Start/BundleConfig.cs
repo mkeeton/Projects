@@ -27,6 +27,12 @@ namespace IcedMemories
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));
 
+      bundles.Add(new ScriptBundle("~/bundles/webtab").Include(
+                "~/Scripts/webtab.js"));
+
+      bundles.Add(new StyleBundle("~/Content/webtab").Include(
+                "~/Content/webtab.css"));
+
       // Set EnableOptimizations to false for debugging. For more information,
       // visit http://go.microsoft.com/fwlink/?LinkId=301862
       BundleTable.EnableOptimizations = true;
