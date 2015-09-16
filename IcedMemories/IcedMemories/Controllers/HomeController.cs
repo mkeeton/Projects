@@ -16,8 +16,6 @@ namespace IcedMemories.Controllers
     [System.Web.Mvc.Route("~/About")]
     public ActionResult About()
     {
-      ViewBag.Message = "Your application description page.";
-
       return View();
     }
 

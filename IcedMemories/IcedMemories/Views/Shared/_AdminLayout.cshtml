@@ -7,7 +7,7 @@
   @Styles.Render("~/Content/css")
   @Styles.Render("~/Content/webtab")
   @Scripts.Render("~/bundles/modernizr")
-
+    <link href='https://fonts.googleapis.com/css?family=Tangerine:700' rel='stylesheet' type='text/css'>
 </head>
 <body>
   @Scripts.Render("~/bundles/jquery")
@@ -22,11 +22,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @Html.ActionLink("Iced Memories", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li>@Html.ActionLink("Home", "Index", "Home")</li>
           <li>@Html.ActionLink("Cakes", "Cakes", "Admin")</li>
           <li>@Html.ActionLink("Categories", "Categories", "Admin")</li>
         </ul>

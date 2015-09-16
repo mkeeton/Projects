@@ -15,3 +15,43 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.jumbotron-title { font-family: 'Tangerine', serif;
+                   font-size:5em;
+  text-shadow: 4px 4px 4px #aaa;
+  color: #fa6bfa
+}
+
+.navbar-inverse .navbar-brand{font-family: 'Tangerine', serif;
+              color:white;
+              font-size:3em;
+}
+
+.navText {font-family: 'Tangerine', serif;
+              color:white;
+              font-size:2.5em;
+}
+
+.navbar{
+    background-color: #f8a3f8;
+}
+
+footer{text-align:center;}
+
+.centeredBox {
+    text-align:center;
+}
+@media (max-width: 767px) {
+    .jumbotron {
+        visibility:visible;
+        background-image: url('/Images/JumbotronImage-small.jpg');
+        height: 300px;
+    }
+}
+@media (min-width: 768px) {
+    .jumbotron {
+        visibility:visible;
+        background-image: url('/Images/JumbotronImage2.jpg');
+        height: 400px;
+    }
+}
