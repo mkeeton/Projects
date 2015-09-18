@@ -13,7 +13,7 @@ namespace IcedMemories.Infrastructure.Repositories
 
     public static IDbContext Create()
     {
-      return new DapperDbContext();
+      return new DapperAccessDbContext();
     }
   }
 }

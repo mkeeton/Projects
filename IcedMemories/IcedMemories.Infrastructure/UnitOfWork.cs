@@ -5,21 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using IcedMemories.Data.Interfaces;
 using IcedMemories.Domain.Models;
-using IcedMemories.Infrastructure.Repositories;
+using IcedMemories.Infrastructure.Interfaces;
+using IcedMemories.Infrastructure.Interfaces.Repositories;
+using IcedMemories.Infrastructure.Repositories.Sql;
 
 namespace IcedMemories.Infrastructure
 {
-  public class UnitOfWork : IDisposable
+  public class UnitOfWork : IDisposable, IUnitOfWork
   {
     private IDbContext _dbContext;
-    private UserRepository<User> _userRepository;
-    private RoleRepository<Role> _roleRepository;
-    private CakeRepository _cakeRepository;
-    private SearchCategoryRepository _categoryRepository;
-    private SearchCategoryOptionRepository _categoryOptionRepository;
-    private SearchCategorySelectionRepository _categoryOptionSelectionRepository;
+    private IUserRepository<User> _userRepository;
+    private IRoleRepository<Role> _roleRepository;
+    private ICakeRepository _cakeRepository;
+    private ISearchCategoryRepository _categoryRepository;
+    private ISearchCategoryOptionRepository _categoryOptionRepository;
+    private ISearchCategorySelectionRepository _categoryOptionSelectionRepository;
 
-    public static UnitOfWork Create()
+    public static IUnitOfWork Create()
     {
       return new UnitOfWork();
     }
@@ -73,7 +75,7 @@ namespace IcedMemories.Infrastructure
       _dbContext.RollbackTransaction();
     }
 
-    public UserRepository<User> UserManager
+    public IUserRepository<User> UserManager
     {
       get
       {
@@ -89,7 +91,7 @@ namespace IcedMemories.Infrastructure
       }
     }
 
-    public RoleRepository<Role> RoleManager
+    public IRoleRepository<Role> RoleManager
     {
       get
       {
@@ -105,7 +107,7 @@ namespace IcedMemories.Infrastructure
       }
     }
 
-    public CakeRepository CakeManager
+    public ICakeRepository CakeManager
     {
       get
       {
@@ -121,7 +123,7 @@ namespace IcedMemories.Infrastructure
       }
     }
 
-    public SearchCategoryRepository SearchCategoryManager
+    public ISearchCategoryRepository SearchCategoryManager
     {
       get
       {
@@ -137,7 +139,7 @@ namespace IcedMemories.Infrastructure
       }
     }
 
-    public SearchCategoryOptionRepository SearchCategoryOptionManager
+    public ISearchCategoryOptionRepository SearchCategoryOptionManager
     {
       get
       {
@@ -153,7 +155,7 @@ namespace IcedMemories.Infrastructure
       }
     }
 
-    public SearchCategorySelectionRepository SearchCategorySelectionManager
+    public ISearchCategorySelectionRepository SearchCategorySelectionManager
     {
       get
       {

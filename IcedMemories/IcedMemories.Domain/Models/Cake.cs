@@ -13,5 +13,6 @@ namespace IcedMemories.Domain.Models
     public String Title { get; set;}
     public String Description { get; set;}
     public String ImageLink { get; set; }
+    
   }
 }

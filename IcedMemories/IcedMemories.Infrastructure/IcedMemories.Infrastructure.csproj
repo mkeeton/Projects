@@ -45,15 +45,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\Repositories\ICakeRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ISearchCategoryOptionRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ISearchCategoryRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ISearchCategorySelectionRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CakeRepository.cs" />
+    <Compile Include="Repositories\Ole\CakeRepository.cs" />
+    <Compile Include="Repositories\Ole\RoleRepository.cs" />
+    <Compile Include="Repositories\Ole\SearchCategoryOptionRepository.cs" />
+    <Compile Include="Repositories\Ole\SearchCategoryRepository.cs" />
+    <Compile Include="Repositories\Ole\SearchCategorySelectionRepository.cs" />
+    <Compile Include="Repositories\Sql\CakeRepository.cs" />
     <Compile Include="Repositories\DbContext.cs" />
-    <Compile Include="Repositories\RoleRepository.cs" />
-    <Compile Include="Repositories\SearchCategoryOptionRepository.cs" />
-    <Compile Include="Repositories\SearchCategoryRepository.cs" />
-    <Compile Include="Repositories\SearchCategorySelectionRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\Ole\UserRepository.cs" />
+    <Compile Include="Repositories\Sql\RoleRepository.cs" />
+    <Compile Include="Repositories\Sql\SearchCategoryOptionRepository.cs" />
+    <Compile Include="Repositories\Sql\SearchCategoryRepository.cs" />
+    <Compile Include="Repositories\Sql\SearchCategorySelectionRepository.cs" />
+    <Compile Include="Repositories\Sql\UserRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
+    <Compile Include="UnitOfWorkOle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IcedMemories.Data\IcedMemories.Data.csproj">

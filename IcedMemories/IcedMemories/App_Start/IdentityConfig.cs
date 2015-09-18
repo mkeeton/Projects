@@ -6,6 +6,7 @@ using System.Security.Claims;
 using IcedMemories.Data.Interfaces;
 using IcedMemories.Domain.Models;
 using IcedMemories.Infrastructure;
+using IcedMemories.Infrastructure.Interfaces;
 
 namespace IcedMemories
 {
@@ -28,7 +29,7 @@ namespace IcedMemories
 
     public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
     {
-      var manager = new ApplicationUserManager(context.Get<UnitOfWork>().UserManager);
+      var manager = new ApplicationUserManager(context.Get<IUnitOfWork>().UserManager);
       // Configure validation logic for usernames
       manager.UserValidator = new UserValidator<User, System.Guid>(manager)
       {
@@ -83,7 +84,7 @@ namespace IcedMemories
 
     public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
     {
-      var manager = new ApplicationRoleManager(context.Get<UnitOfWork>().RoleManager);
+      var manager = new ApplicationRoleManager(context.Get<IUnitOfWork>().RoleManager);
       // Configure validation logic for usernames
       return manager;
     }

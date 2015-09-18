@@ -12,6 +12,7 @@ using Owin;
 using IcedMemories.Models;
 using IcedMemories.Domain.Models;
 using IcedMemories.Infrastructure;
+using IcedMemories.Infrastructure.Interfaces;
 
 namespace IcedMemories.Controllers
 {
@@ -19,23 +20,23 @@ namespace IcedMemories.Controllers
   public class AccountController : Controller
   {
     private ApplicationUserManager _userManager;
-    private UnitOfWork _unitOfWork;
+    private IUnitOfWork _unitOfWork;
 
     public AccountController()
     {
     }
 
-    public AccountController(ApplicationUserManager userManager, UnitOfWork unitOfWork)
+    public AccountController(ApplicationUserManager userManager, IUnitOfWork unitOfWork)
     {
       UserManager = userManager;
       WorkManager = unitOfWork;
     }
 
-    public UnitOfWork WorkManager
+    public IUnitOfWork WorkManager
     {
       get
       {
-        return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<UnitOfWork>();
+        return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<IUnitOfWork>();
       }
       set
       {

@@ -7,10 +7,11 @@ using System.Data;
 using Dapper;
 using IcedMemories.Data.Interfaces;
 using IcedMemories.Domain.Models;
+using IcedMemories.Infrastructure.Interfaces.Repositories;
 
-namespace IcedMemories.Infrastructure.Repositories
+namespace IcedMemories.Infrastructure.Repositories.Sql
 {
-  public class SearchCategorySelectionRepository
+  public class SearchCategorySelectionRepository : ISearchCategorySelectionRepository
   {
       private readonly IDbContext CurrentContext;
 

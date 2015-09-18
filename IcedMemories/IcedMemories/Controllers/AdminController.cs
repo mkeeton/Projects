@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using IcedMemories.Infrastructure;
+using IcedMemories.Infrastructure.Interfaces;
 using AutoMapper;
 
 namespace IcedMemories.Controllers
@@ -14,13 +15,13 @@ namespace IcedMemories.Controllers
     public class AdminController : Controller
     {
 
-      private UnitOfWork _unitOfWork;
+      private IUnitOfWork _unitOfWork;
 
-        public UnitOfWork WorkManager
+        public IUnitOfWork WorkManager
         {
           get
           {
-            return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<UnitOfWork>();
+            return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<IUnitOfWork>();
           }
           set
           {
@@ -42,9 +43,19 @@ namespace IcedMemories.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> CakeDetails(Guid id)
+        public async Task<ActionResult> CakeDetails(Guid? id)
         {
-          Models.CakeViewModel _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id));
+            Models.CakeViewModel _cake;
+            if (id.HasValue == true)
+            {
+                _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id.Value));
+            }
+            else
+            {
+                _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(new IcedMemories.Domain.Models.Cake());
+                _cake.DateAdded = System.DateTime.Now;
+            }
+
           try
           { 
           _cake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
@@ -141,7 +152,8 @@ namespace IcedMemories.Controllers
           {
 
           }
-          return PartialView("CakeDetailsPartial", _returnCake);
+          //return PartialView("CakeDetailsPartial", _returnCake);
+          return RedirectToAction("Cakes");
         }
 
         [Authorize(Roles="Admin")]
@@ -152,9 +164,18 @@ namespace IcedMemories.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> CategoryDetails(Guid id)
+        public async Task<ActionResult> CategoryDetails(Guid? id)
         {
-          Models.SearchCategorySelection _category = Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(await WorkManager.SearchCategoryManager.LoadAsync(id));
+          Models.SearchCategorySelection _category;
+          if(id.HasValue)
+          {
+            _category= Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(await WorkManager.SearchCategoryManager.LoadAsync(id.Value));
+          }
+          else
+          {
+            _category= Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(new IcedMemories.Domain.Models.SearchCategory());
+          }
+           
           try
           {
             _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));

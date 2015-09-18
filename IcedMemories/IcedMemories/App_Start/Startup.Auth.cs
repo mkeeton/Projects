@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
+using IcedMemories.Infrastructure.Interfaces;
 using IcedMemories.Infrastructure.Repositories;
 using IcedMemories.Domain.Models;
 using IcedMemories.Infrastructure;
@@ -20,7 +21,7 @@ namespace IcedMemories
 
           // Configure the db context and user manager to use a single instance per request
           app.CreatePerOwinContext(DbContext.Create);
-          app.CreatePerOwinContext<UnitOfWork>(UnitOfWork.Create);
+          app.CreatePerOwinContext<IUnitOfWork>(UnitOfWorkOle.Create);
           app.CreatePerOwinContext<App_Start.OwinSettings>(App_Start.OwinSettings.Create);
           app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
           app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);

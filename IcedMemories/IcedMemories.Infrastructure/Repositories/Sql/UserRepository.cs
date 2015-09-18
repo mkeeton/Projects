@@ -8,10 +8,11 @@ using Dapper;
 using Microsoft.AspNet.Identity;
 using IcedMemories.Data.Interfaces;
 using IcedMemories.Domain.Models;
+using IcedMemories.Infrastructure.Interfaces.Repositories;
 
-namespace IcedMemories.Infrastructure.Repositories
+namespace IcedMemories.Infrastructure.Repositories.Sql
 {
-  public class UserRepository<T> : IUserStore<User, Guid>, IUserLoginStore<User, Guid>, IUserPasswordStore<User, Guid>, IUserSecurityStampStore<User, Guid>, IUserEmailStore<User, Guid>, IUserRoleStore<User,Guid>
+  public class UserRepository<T> : IUserRepository<User>
   {
     private readonly IDbContext CurrentContext;
 
@@ -293,7 +294,7 @@ namespace IcedMemories.Infrastructure.Repositories
       return Task.Factory.StartNew(() =>
       {
         using (IDbConnection connection = CurrentContext.OpenConnection())
-          return connection.Query<User>("select * from auth_Users where lower(Email) = lower(@Email)", new { email }).SingleOrDefault();
+          return connection.Query<User>("select * from auth_Users where lower([Email]) = lower(@Email)", new { email }).SingleOrDefault();
       });
     }
 
