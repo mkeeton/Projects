@@ -1,12 +1,10 @@
 ﻿@using IcedMemories.Helpers
 @model IcedMemories.Models.SearchCategoryOptionSelection
 
-<tr>
     @using (Html.BeginCollectionItem("Options"))
     {
-      <td>
-        @Html.HiddenFor(model => model.Id)@Html.EditorFor(model => model.Name)
-      </td>
+        <li>
+            @Html.HiddenFor(model => model.Id)@Html.EditorFor(model => model.Name)
+        </li>
     }
-</tr>
 

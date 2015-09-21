@@ -22,9 +22,18 @@
     // attach modal-container bootstrap attributes to links with .modal-link class.
     // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
     $('body').on('click', '.modal-link', function (e) {
-      e.preventDefault();
-      $(this).attr('data-target', '#modal-container');
-      $(this).attr('data-toggle', 'modal');
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        e.preventDefault();
+        $(this).attr("href", "/Admin/CategoryDetailsPartial/" + $(this).attr("id"));
+        $(this).attr('data-target', '#modal-container');
+        $(this).attr('data-toggle', 'modal');
+      }
+      else {
+        $(this).attr("href", "/Admin/CategoryDetails/" + $(this).attr("id"));
+        $(this).attr('data-target', '');
+        $(this).attr('data-toggle', '');
+        return true;
+      }
     });
     // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
     $('body').on('click', '.modal-close-btn', function () {
@@ -58,7 +67,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("View", "CategoryDetails", "Admin", new { id = item.Id }, new { @class = "modal-link btn btn-success" })|
+            @Html.ActionLink("View", "CategoryDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })|
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

@@ -18,6 +18,14 @@
     });
   });
 
+    $("#addItem").click(function () {
+        $.ajax({
+            url: this.href,
+            cache: false,
+            success: function (html) { $("#editorRows").append(html); }
+        });
+        return false;
+    });
 </script>
 
 <div class="modal-body">
@@ -38,13 +46,13 @@
           @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
       </div>
-
-      <table>
+      @Html.ActionLink("Add another...", "Add", null, new { id = "addItem" })
+      <ul id="editorRows">
         @foreach (var item in Model.Options)
         {
           Html.RenderPartial("CategoryOptionsPartial", item);
         }
-      </table>
+      </ul>
 
       <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

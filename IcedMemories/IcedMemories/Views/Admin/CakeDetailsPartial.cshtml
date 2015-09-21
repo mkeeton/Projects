@@ -76,7 +76,7 @@
             <div class="form-group">
               @Html.LabelFor(model => model.ImageUpload, htmlAttributes: new { @class = "control-label col-md-2" })
               <div class="col-md-10">
-                @Html.ImageFor(model => model.ImageLink, new { alt = Model.Title })
+                @Html.ImageFor(model => model.ImageLink, new { alt = Model.Title, Class = "cakeImage" })
                 <input id="ImageUpload" name="ImageUpload" type="file">
 
               </div>

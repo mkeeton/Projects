@@ -22,17 +22,20 @@
     // attach modal-container bootstrap attributes to links with .modal-link class.
     // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
       $('body').on('click', '.modal-link', function (e) {
-          if (window.matchMedia("(min-width: 768px)").matches) {
-              e.preventDefault();
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            e.preventDefault();
+              $(this).attr("href", "/Admin/CakeDetailsPartial/" + $(this).attr("id"));
               $(this).attr('data-target', '#modal-container');
               $(this).attr('data-toggle', 'modal');
           }
           else {
+          $(this).attr("href", "/Admin/CakeDetails/" + $(this).attr("id"));
               $(this).attr('data-target', '');
               $(this).attr('data-toggle', '');
               return true;
           }
-    });
+      });
+
     // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
     $('body').on('click', '.modal-close-btn', function () {
       $('#modal-container').modal('hide');
@@ -45,6 +48,10 @@
       return false;
     });
   });
+
+  function ViewCake(e, cakeId) {
+    alert(cakeId);
+  }
 </script>
 
 
@@ -86,7 +93,7 @@
             @Html.Image(item.ImageLink,item.Title,"","")
         </td>
         <td>
-            @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @class = "modal-link btn btn-success" })|
+            @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })|
             @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "modal-link btn" })
         </td>
     </tr>
