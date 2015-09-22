@@ -51,7 +51,7 @@
 <h2>Categories</h2>
 
 <p>
-    @Html.ActionLink("Add Category", "CategoryDetails", "Admin", new {}, new { @class = "modal-link btn" })
+    @Html.ActionLink("Add Category", "CategoryDetails", "Admin", new { }, new { @class = "modal-link btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -67,8 +67,8 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("View", "CategoryDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })|
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("View", "CategoryDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id}, new{ @class = "modal-link btn btn-danger" })
         </td>
     </tr>
 }

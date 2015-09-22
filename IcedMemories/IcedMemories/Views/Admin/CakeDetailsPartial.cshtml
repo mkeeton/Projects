@@ -7,25 +7,26 @@
     openStartTab("", "topLevel");
   });
 
-  $('#CakeDetails').submit(function (e) {
-    e.preventDefault();
-    var formData = new FormData(this);
-    formData.append('ImageUpload', $('#ImageUpload')[0].files[0]);
-    console.log(formData);
-    $.ajax({
-      url: '/Admin/CakeDetails',
-      type: 'POST',
-      cache: false,
-      contentType: false,
-      processData: false,
-      enctype: 'multipart/form-data',
-      data: formData,
-      success: function (data) {
-        $("#modal-container").load('@(Url.Action("CakeDetails","Admin",null, Request.Url.Scheme))');
-      }
+  $(function () {
+    $('#CakeDetails').submit(function (e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      formData.append('ImageUpload', $('#ImageUpload')[0].files[0]);
+      console.log(formData);
+      $.ajax({
+        url: '/Admin/CakeDetails',
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        enctype: 'multipart/form-data',
+        data: formData,
+        success: function (data) {
+          $(location).attr('href', '/Admin/Cakes')
+        }
+      });
     });
   });
-
 </script>
   <div class="modal-body">
 
@@ -106,7 +107,7 @@
           }
 
           <div>
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Cakes")
           </div>
 
           @section Scripts {

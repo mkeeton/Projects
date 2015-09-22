@@ -35,6 +35,11 @@ namespace IcedMemories.Helpers
       return MvcHtmlString.Create(builder.ToString(TagRenderMode.SelfClosing));
     }
 
+    public static MvcHtmlString Image(this HtmlHelper helper, string src, object htmlAttributes)
+    {
+      return BuildImageTag(src, htmlAttributes);
+    }
+
     public static MvcHtmlString ImageFor<TModel, TProperty>(
     this HtmlHelper<TModel> htmlHelper,
     Expression<Func<TModel, TProperty>> expression)

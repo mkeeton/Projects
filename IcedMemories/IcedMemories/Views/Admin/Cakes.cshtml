@@ -59,7 +59,7 @@
 <h2>Cakes</h2>
 
 <p>
-    @Html.ActionLink("Add Cake", "CakeDetails", "Admin", new { }, new { @class = "modal-link btn" })
+    @Html.ActionLink("Add Cake", "CakeDetails", "Admin", new { }, new { @class = "modal-link btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -93,8 +93,8 @@
             @Html.Image(item.ImageLink,item.Title,"","")
         </td>
         <td>
-            @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })|
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "modal-link btn" })
+            @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "modal-link btn btn-danger" })
         </td>
     </tr>
 }

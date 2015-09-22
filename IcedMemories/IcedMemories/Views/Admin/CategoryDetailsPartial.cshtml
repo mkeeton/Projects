@@ -1,31 +1,34 @@
-﻿@model IcedMemories.Models.SearchCategorySelection
+﻿@using IcedMemories.Helpers
+@model IcedMemories.Models.SearchCategorySelection
 
 <script type="text/javascript">
-  $('#CategoryDetails').submit(function (e) {
-    e.preventDefault();
-    var formData = new FormData(this);
-    $.ajax({
-      url: '/Admin/CategoryDetails',
-      type: 'POST',
-      cache: false,
-      contentType: false,
-      processData: false,
-      enctype: 'multipart/form-data',
-      data: formData,
-      success: function (data) {
-        $("#modal-container").load('@(Url.Action("CategoryDetails","Admin",null, Request.Url.Scheme))');
-      }
+  $(function () {
+    $('#CategoryDetails').submit(function (e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      $.ajax({
+        url: '/Admin/CategoryDetails',
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        enctype: 'multipart/form-data',
+        data: formData,
+        success: function (data) {
+          $(location).attr('href', '/Admin/Categories')
+        }
+      });
     });
-  });
 
     $("#addItem").click(function () {
-        $.ajax({
-            url: this.href,
-            cache: false,
-            success: function (html) { $("#editorRows").append(html); }
-        });
-        return false;
+      $.ajax({
+        url: this.href,
+        cache: false,
+        success: function (html) { $("#editorRows").append(html); }
+      });
+      return false;
     });
+  });
 </script>
 
 <div class="modal-body">
@@ -46,7 +49,7 @@
           @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
       </div>
-      @Html.ActionLink("Add another...", "Add", null, new { id = "addItem" })
+      @Html.ActionLink("Add Option", "Add", null, new { id = "addItem" })
       <ul id="editorRows">
         @foreach (var item in Model.Options)
         {
@@ -63,7 +66,7 @@
   }
 
   <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Categories")
   </div>
 
   @section Scripts {
