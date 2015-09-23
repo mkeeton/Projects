@@ -4,4 +4,3 @@ C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\bin\
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\obj\Debug\IcedMemories.Domain.dll
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\obj\Debug\IcedMemories.Domain.pdb
-C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\obj\Debug\IcedMemories.Domain.csprojResolveAssemblyReference.cache

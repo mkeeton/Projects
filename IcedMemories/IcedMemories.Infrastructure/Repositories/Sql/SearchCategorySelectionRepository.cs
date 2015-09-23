@@ -114,5 +114,18 @@ namespace IcedMemories.Infrastructure.Repositories.Sql
           connection.Execute("delete from app_SearchCategorySelections WHERE Id=@Id", new { Id = categorySelectionId });
       });
     }
+
+    public Task DeleteForCakeAsync(Guid cakeId)
+    {
+      if (cakeId == Guid.Empty)
+        throw new ArgumentNullException("cakeId");
+
+
+      return Task.Factory.StartNew(() =>
+      {
+        using (IDbConnection connection = CurrentContext.OpenConnection())
+          connection.Execute("delete from app_SearchCategorySelections WHERE CakeId=@CakeId", new { CakeId = cakeId });
+      });
+    }
   }
 }

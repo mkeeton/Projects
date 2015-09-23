@@ -93,5 +93,22 @@ namespace IcedMemories.Infrastructure.Repositories.Sql
       });
     }
 
+    public virtual Task DeleteAsync(Guid cakeId)
+    {
+      if (cakeId == Guid.Empty)
+      {
+        throw new ArgumentNullException("cakeId");
+      }
+      else
+      {
+
+        return Task.Factory.StartNew(() =>
+        {
+          using (IDbConnection connection = CurrentContext.OpenConnection())
+            connection.Execute("Delete from app_Cakes where Id = @Id", new { Id = cakeId });
+        });
+      }
+    }
+
   }
 }

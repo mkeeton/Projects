@@ -15,6 +15,42 @@
 
 <script type="text/javascript">
 
+  $(window).load(function () {
+    var headerHeight = 0;
+    var detailsHeight = 0;
+    var imageHeight = 0;
+    var counter = 0
+    $('.CakeHeader').each(function () {
+      if ($(this).height() > headerHeight) {
+        headerHeight = $(this).height();
+      }
+    });
+    $('.CakeHeader').each(function () {
+      $(this).height(headerHeight);
+    });
+    $('.CakeDetails').each(function () {
+      if ($(this).height() > detailsHeight) {
+        detailsHeight = $(this).height();
+      }
+    });
+    $('.CakeDetails').each(function () {
+      $(this).height(detailsHeight);
+    });
+
+    $('.CakeImageContainer').each(function () {
+      imageHeight = imageHeight + $(this).height();
+      counter += 1;
+    });
+    $('.CakeImageContainer').each(function () {
+      $(this).height(imageHeight / counter);
+    });
+    $('.CakeImage').each(function () {
+      if ($(this).height() > (imageHeight / counter)) {
+        $(this).height(imageHeight / counter);
+      }
+    });
+  });
+
   $(function () {
     // Initialize numeric spinner input boxes
     //$(".numeric-spinner").spinedit();
@@ -49,9 +85,6 @@
     });
   });
 
-  function ViewCake(e, cakeId) {
-    alert(cakeId);
-  }
 </script>
 
 
@@ -61,45 +94,25 @@
 <p>
     @Html.ActionLink("Add Cake", "CakeDetails", "Admin", new { }, new { @class = "modal-link btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageLink)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAdded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.Image(item.ImageLink,item.Title,"","")
-        </td>
-        <td>
-            @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "modal-link btn btn-danger" })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="row">
+  @foreach (var item in Model)
+  {
+    <article class="col-lg-4 col-md-6 col-sm-12 col-xs-12 CakeContainer">
+      <header class="CakeHeader">
+        <h4>@Html.DisplayFor(modelItem => item.DateAdded) - @Html.DisplayFor(modelItem => item.Title) </h4>
+        @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "modal-link btn btn-danger" })
+      </header>
+      <section class="CakeDetails">
+        @Html.DisplayFor(modelItem => item.Description)
+      </section>
+      <section class="CakeImageContainer">
+        @Html.Image(item.ImageLink, new{ @alt=item.Title, @class="CakeImage"})
+      </section>
+    </article>
+  }
+</div>
 
 <div id="modal-container" class="modal fade"
      tabindex="-1" role="dialog">

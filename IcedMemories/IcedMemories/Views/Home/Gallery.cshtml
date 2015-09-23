@@ -4,14 +4,57 @@
     ViewBag.Title = "Gallery";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script type="text/javascript">
+  $(window).load(function () {
+    var height = 0;
+    var counter = 0
+    $('.img-responsive').each(function () {
+      height = height + $(this).height();
+      counter += 1;
+    });
+    $('.GalleryImageItem').each(function () {
+        $(this).height(height / counter);
+    });
+    $('.GalleryImage').each(function () {
+      if ($(this).height() > (height / counter)) {
+        $(this).height((height / counter));
+      }
+    });
+  });
+ 
+
+  $(function () {
+    $('.GalleryImage').on('click', function () {
+      var src = $(this).attr('src');
+      var img = '<img src="' + src + '" class="img-responsive" style="margin-left:auto; margin-right:auto;"/>';
+      $('#myModal').modal();
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#myModal .modal-body').html(img);
+      });
+      $('#myModal').on('hidden.bs.modal', function () {
+        $('#myModal .modal-body').html('');
+      });
+    });
+  });
+</script>
 <div class="container body-content">
   <h2>Gallery</h2>
-  <ul class="row">
+  <div class="row ImageGallery">
     @foreach (var item in Model.Cakes)
     {
-      <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-        @Html.Image(item.ImageLink, new { @alt = item.Title, @class = "img-responsive"})
-      </li>
+      <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 GalleryImageItem">
+        @Html.Image(item.ImageLink, new { @alt = item.Title, @class = "img-responsive GalleryImage"})
+      </div>
     }
-  </ul>
+  </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align:center;">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

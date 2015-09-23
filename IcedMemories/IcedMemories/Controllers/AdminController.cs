@@ -132,17 +132,44 @@ namespace IcedMemories.Controllers
         public async Task<ActionResult> CakeDetails(Models.CakeViewModel model)
         {
           IcedMemories.Domain.Models.Cake _cake = await WorkManager.CakeManager.LoadAsync(model.Id);
+          String _imagePath = "";
           if(_cake == null)
           {
             _cake = new Domain.Models.Cake();
+            _cake.DateAdded = System.DateTime.Now;
           }
           _cake.Title = model.Title;
           _cake.Description = model.Description;
           if (model.ImageUpload != null)
           {
-            String _imagePath = "/Images/Cakes/" + Guid.NewGuid().ToString() + ".jpg";
-            model.ImageUpload.SaveAs(Server.MapPath(_imagePath));
-            _cake.ImageLink = _imagePath;
+            if(_cake.ImageLink=="")
+            { 
+              _imagePath = "/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00") + "/" + Guid.NewGuid().ToString() + ".jpg";
+            }
+            else
+            {
+              _imagePath = _cake.ImageLink;
+            }
+            if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000"))) == false)
+            {
+              System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000")));
+            }
+            if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00"))) == false)
+            {
+              System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00")));
+            }
+            try
+            {
+              if(System.IO.File.Exists(Server.MapPath(_imagePath)))
+              {
+                System.IO.File.Delete(Server.MapPath(_imagePath));
+              }
+              model.ImageUpload.SaveAs(Server.MapPath(_imagePath));
+              _cake.ImageLink = _imagePath;
+            }
+            catch(Exception ex)
+            { 
+            }
           }
           await WorkManager.CakeManager.SaveAsync(_cake);
           foreach(Models.SearchCategorySelection _sCat in model.Categories)
@@ -197,6 +224,32 @@ namespace IcedMemories.Controllers
           }
           //return PartialView("CakeDetailsPartial", _returnCake);
           return RedirectToAction("Cakes");
+        }
+
+        public async Task<ActionResult> DeleteCake(Guid? id)
+        {
+            if(id.HasValue)
+            {
+              IcedMemories.Domain.Models.Cake _cake = await WorkManager.CakeManager.LoadAsync(id.Value);
+              if(_cake != null)
+              {
+                WorkManager.BeginWork();
+                try
+                {
+                  System.IO.File.Delete(Server.MapPath(_cake.ImageLink));
+                  await WorkManager.SearchCategorySelectionManager.DeleteForCakeAsync(_cake.Id);
+                  await WorkManager.CakeManager.DeleteAsync(_cake.Id);
+                  WorkManager.CommitWork();
+                }
+                catch(Exception ex)
+                { 
+                  WorkManager.RollbackWork();
+                }
+                
+                
+              }
+            }
+            return RedirectToAction("Cakes");
         }
 
         [Authorize(Roles="Admin")]

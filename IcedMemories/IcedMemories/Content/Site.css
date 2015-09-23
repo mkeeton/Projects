@@ -26,7 +26,9 @@ textarea {
               color:white;
               font-size:3em;
 }
-
+.navbar-inverse .navbar-nav li a {
+  color:white;
+}
 .navText {font-family: 'Tangerine', serif;
               color:white;
               font-size:2.5em;
@@ -58,3 +60,34 @@ footer{text-align:center;}
 .cakeImage {
 max-width:100%;
 }
+
+.ImageGallery {
+          padding:0 0 0 0;
+          margin:0 0 0 0;
+      }
+.GalleryImageItem {
+          list-style:none;
+          margin-bottom:25px;
+      }
+img.GalleryImage {
+          cursor: pointer;
+          margin-left:auto;
+          margin-right:auto;
+      }
+
+img.CakeImage {
+max-width:100%;
+          margin-left:auto;
+          margin-right:auto;
+}
+
+.CakeImageContainer{
+text-align:center;
+}
+
+.panel-profile .panel-title{margin-bottom:5px;font-weight:bold;}
+.panel-profile .panel-heading{height:150px;background-size:cover}
+.panel-profile-img{max-width:100px;margin-top:-70px;margin-bottom:5px;border:3px solid #fff;border-radius:100%;box-shadow:0 1px 1px rgba(0,0,0,0.1)}
+.panel-menu{list-style:none;padding:0}
+.panel-menu-item{display:inline-block;padding:0 10px;border-right:1px solid var(--colorGrayLighter)}
+.panel-menu-item:last-child{border-right:0}
