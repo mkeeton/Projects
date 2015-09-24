@@ -102,7 +102,7 @@
       <header class="CakeHeader">
         <h4>@Html.DisplayFor(modelItem => item.DateAdded) - @Html.DisplayFor(modelItem => item.Title) </h4>
         @Html.ActionLink("View", "CakeDetails", "Admin", new { id = item.Id }, new { @id = item.Id, @class = "modal-link btn btn-success" })
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "modal-link btn btn-danger" })
+        @Html.ActionLink("Delete", "DeleteCake", new { id = item.Id }, new { @class = "btn btn-danger" })
       </header>
       <section class="CakeDetails">
         @Html.DisplayFor(modelItem => item.Description)

@@ -6,7 +6,38 @@
 }
 
 <script type="text/javascript">
+
+  var waitForFinalEvent = (function () {
+    var timers = {};
+    return function (callback, ms, uniqueId) {
+      if (!uniqueId) {
+        uniqueId = "Don't call this twice without a uniqueId";
+      }
+      if (timers[uniqueId]) {
+        clearTimeout(timers[uniqueId]);
+      }
+      timers[uniqueId] = setTimeout(callback, ms);
+    };
+  })();
+
   $(window).load(function () {
+    SizeImages();
+  });
+
+  $(window).resize(function () {
+    $('.GalleryImageItem').each(function () {
+      $(this).height("");
+    });
+    $('.GalleryImage').each(function () {
+        $(this).height("");
+    });
+    waitForFinalEvent(function () {
+      SizeImages();
+      //...
+    }, 500, "Image resize");
+  });
+
+  function SizeImages() {
     var height = 0;
     var counter = 0
     $('.img-responsive').each(function () {
@@ -14,14 +45,14 @@
       counter += 1;
     });
     $('.GalleryImageItem').each(function () {
-        $(this).height(height / counter);
+      $(this).height(height / counter);
     });
     $('.GalleryImage').each(function () {
       if ($(this).height() > (height / counter)) {
         $(this).height((height / counter));
       }
     });
-  });
+  }
  
 
   $(function () {

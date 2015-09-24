@@ -136,40 +136,54 @@ namespace IcedMemories.Controllers
           if(_cake == null)
           {
             _cake = new Domain.Models.Cake();
+            
+          }
+          if (_cake.Id == Guid.Empty)
+          {
             _cake.DateAdded = System.DateTime.Now;
           }
           _cake.Title = model.Title;
           _cake.Description = model.Description;
           if (model.ImageUpload != null)
           {
-            if(_cake.ImageLink=="")
-            { 
-              _imagePath = "/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00") + "/" + Guid.NewGuid().ToString() + ".jpg";
-            }
-            else
-            {
-              _imagePath = _cake.ImageLink;
-            }
-            if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000"))) == false)
-            {
-              System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000")));
-            }
-            if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00"))) == false)
-            {
-              System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00")));
-            }
             try
-            {
-              if(System.IO.File.Exists(Server.MapPath(_imagePath)))
-              {
-                System.IO.File.Delete(Server.MapPath(_imagePath));
-              }
-              model.ImageUpload.SaveAs(Server.MapPath(_imagePath));
-              _cake.ImageLink = _imagePath;
-            }
-            catch(Exception ex)
             { 
+              if ((_cake.ImageLink==null) || (_cake.ImageLink.Trim() == ""))
+              { 
+                _imagePath = "/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00") + "/" + Guid.NewGuid().ToString() + ".jpg";
+              }
+              else
+              {
+                _imagePath = _cake.ImageLink;
+              }
+            
+              if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000"))) == false)
+              {
+                System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000")));
+              }
+              if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00"))) == false)
+              {
+                System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00")));
+              }
+              try
+              {
+                if(System.IO.File.Exists(Server.MapPath(_imagePath)))
+                {
+                  System.IO.File.Delete(Server.MapPath(_imagePath));
+                }
+                model.ImageUpload.SaveAs(Server.MapPath(_imagePath));
+                _cake.ImageLink = _imagePath;
+              }
+              catch(Exception ex)
+              { 
+              }
             }
+            catch(Exception exUpload)
+            {
+            }
+          }
+          else
+          {
           }
           await WorkManager.CakeManager.SaveAsync(_cake);
           foreach(Models.SearchCategorySelection _sCat in model.Categories)
