@@ -250,7 +250,12 @@ namespace IcedMemories.Controllers
                 WorkManager.BeginWork();
                 try
                 {
-                  System.IO.File.Delete(Server.MapPath(_cake.ImageLink));
+                  try
+                  { 
+                    System.IO.File.Delete(Server.MapPath(_cake.ImageLink));
+                  }
+                  catch(Exception exImage)
+                  { }
                   await WorkManager.SearchCategorySelectionManager.DeleteForCakeAsync(_cake.Id);
                   await WorkManager.CakeManager.DeleteAsync(_cake.Id);
                   WorkManager.CommitWork();

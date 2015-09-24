@@ -9,5 +9,6 @@ namespace IcedMemories.Models
   {
 
     public IList<CakeViewModel> Cakes { get; set; }
+    public IList<SearchCategorySelection> SearchCategories { get; set; }
   }
 }

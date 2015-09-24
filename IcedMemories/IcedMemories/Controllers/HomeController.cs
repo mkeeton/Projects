@@ -55,7 +55,31 @@ namespace IcedMemories.Controllers
       {
         _gallery = new Models.Gallery();
       }
-      _gallery.Cakes = Mapper.Map<IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel>>(await WorkManager.CakeManager.GetCakesAsync());
+      if(_gallery.SearchCategories==null)
+      {
+        _gallery.SearchCategories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
+        foreach (Models.SearchCategorySelection _category in _gallery.SearchCategories)
+        {
+          _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+        }
+      }
+      System.Collections.Generic.List<IcedMemories.Domain.Models.SearchCategoryOption> _searchCategoryOptions = new List<IcedMemories.Domain.Models.SearchCategoryOption>();
+      IcedMemories.Domain.Models.SearchCategoryOption _searchOption;
+      foreach(Models.SearchCategorySelection _selectedCategory in _gallery.SearchCategories)
+      {
+        foreach(Models.SearchCategoryOptionSelection _selectedOption in _selectedCategory.Options)
+        {
+          if(_selectedOption.Selected == true)
+          {
+            _searchOption = new Domain.Models.SearchCategoryOption();
+            _searchOption.Id = _selectedOption.Id;
+            _searchOption.CategoryId = _selectedCategory.Id;
+            _searchOption.Name = _selectedOption.Name;
+            _searchCategoryOptions.Add(_searchOption);
+          }
+        }
+      }
+      _gallery.Cakes = Mapper.Map<IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel>>(await WorkManager.CakeManager.GetCakesAsync(_searchCategoryOptions));
       return View(_gallery);
     }
   }

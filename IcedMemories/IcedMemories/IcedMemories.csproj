@@ -247,6 +247,8 @@
     <Content Include="Views\Admin\CakeDetails.cshtml" />
     <Content Include="Views\Admin\CategoryDetails.cshtml" />
     <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Home\_GallerySearchCategoryPartial.cshtml" />
+    <Content Include="Views\Home\_GallerySearchCategoryOptionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Cakes\" />
