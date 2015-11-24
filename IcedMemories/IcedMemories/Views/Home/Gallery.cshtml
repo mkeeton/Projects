@@ -82,16 +82,17 @@
   <div class="row SearchHeader">
     <h4 class="SearchHeaderText">Search</h4>
     <div class="row SearchBody">
-      @using (Html.BeginForm("Gallery", "Home", FormMethod.Post, new { enctype = "multipart/form-data", name = "Cakes", id = "Cakes" }))
-      {
-        @Html.AntiForgeryToken()
-        foreach (var item in Model.SearchCategories)
+        @using (Html.BeginForm("Gallery", "Home", FormMethod.Post, new { enctype = "multipart/form-data", name = "Cakes", id = "Cakes" }))
         {
-          Html.RenderPartial("_GallerySearchCategoryPartial", item);
+          @Html.AntiForgeryToken()
+          <div class="row">
+            @foreach (var item in Model.SearchCategories)
+            {
+              Html.RenderPartial("_GallerySearchCategoryPartial", item);
+            }
+          </div>
+          <input type="submit" value="Search" class="btn btn-default" />
         }
-        <input type="submit" value="Search" class="btn btn-default" />
-      }
-
     </div>
   </div>
   <div class="row ImageGallery">

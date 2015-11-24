@@ -64,3 +64,16 @@ C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Dapper.
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Dapper.xml
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\obj\Debug\IcedMemories.dll
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\obj\Debug\IcedMemories.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\ApplicationInsights.config
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.DependencyCollector.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.Web.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.WindowsServer.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.ApplicationInsights.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.DependencyCollector.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.Web.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.WindowsServer.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.ApplicationInsights.xml

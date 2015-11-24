@@ -133,6 +133,7 @@ namespace IcedMemories.Controllers
         {
           IcedMemories.Domain.Models.Cake _cake = await WorkManager.CakeManager.LoadAsync(model.Id);
           String _imagePath = "";
+          String _imageExtension = "";
           if(_cake == null)
           {
             _cake = new Domain.Models.Cake();
@@ -146,40 +147,44 @@ namespace IcedMemories.Controllers
           _cake.Description = model.Description;
           if (model.ImageUpload != null)
           {
-            try
+            if (model.ImageUpload.FileName.LastIndexOf(".") > -1)
             { 
-              if ((_cake.ImageLink==null) || (_cake.ImageLink.Trim() == ""))
-              { 
-                _imagePath = "/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00") + "/" + Guid.NewGuid().ToString() + ".jpg";
-              }
-              else
-              {
-                _imagePath = _cake.ImageLink;
-              }
-            
-              if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000"))) == false)
-              {
-                System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000")));
-              }
-              if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00"))) == false)
-              {
-                System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00")));
-              }
               try
               {
-                if(System.IO.File.Exists(Server.MapPath(_imagePath)))
+                _imageExtension = model.ImageUpload.FileName.Substring(model.ImageUpload.FileName.LastIndexOf("."));
+                if ((_cake.ImageLink == null) || (_cake.ImageLink.Trim() == "") || (_cake.ImageLink.LastIndexOf(".")==-1))
                 {
-                  System.IO.File.Delete(Server.MapPath(_imagePath));
+                  _imagePath = "/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00") + "/" + Guid.NewGuid().ToString() + _imageExtension;
                 }
-                model.ImageUpload.SaveAs(Server.MapPath(_imagePath));
-                _cake.ImageLink = _imagePath;
+                else
+                {
+                  _imagePath = _cake.ImageLink.Substring(0, _cake.ImageLink.LastIndexOf(".")) + _imageExtension;
+                }
+            
+                if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000"))) == false)
+                {
+                  System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000")));
+                }
+                if (System.IO.Directory.Exists(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00"))) == false)
+                {
+                  System.IO.Directory.CreateDirectory(Server.MapPath("/Images/Cakes/" + _cake.DateAdded.Year.ToString("0000") + "/" + _cake.DateAdded.Month.ToString("00")));
+                }
+                try
+                {
+                  if(System.IO.File.Exists(Server.MapPath(_imagePath)))
+                  {
+                    System.IO.File.Delete(Server.MapPath(_imagePath));
+                  }
+                  model.ImageUpload.SaveAs(Server.MapPath(_imagePath));
+                  _cake.ImageLink = _imagePath;
+                }
+                catch(Exception ex)
+                { 
+                }
               }
-              catch(Exception ex)
-              { 
+              catch(Exception exUpload)
+              {
               }
-            }
-            catch(Exception exUpload)
-            {
             }
           }
           else
