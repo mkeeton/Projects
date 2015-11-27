@@ -14,11 +14,16 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using IcedMemories.Infrastructure;
 using AutoMapper;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
 
 namespace IcedMemories
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+
+        private static IWindsorContainer container;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -32,6 +37,20 @@ namespace IcedMemories
               cfg.CreateMap<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>();
               cfg.CreateMap<IcedMemories.Domain.Models.SearchCategoryOption, Models.SearchCategoryOptionSelection>();
             });
+            BootstrapContainer();
+        }
+
+        protected void Application_End()
+        {
+          container.Dispose();
+        }
+
+        private static void BootstrapContainer()
+        {
+          container = new WindsorContainer()
+              .Install(FromAssembly.This());
+          var controllerFactory = new Factories.WindsorControllerFactory(container.Kernel);
+          ControllerBuilder.Current.SetControllerFactory(controllerFactory);
         }
 
         //protected void Application_OnAuthenticateRequest(Object src, EventArgs e)

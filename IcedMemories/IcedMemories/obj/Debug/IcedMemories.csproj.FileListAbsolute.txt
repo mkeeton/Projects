@@ -77,3 +77,7 @@ C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microso
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.Web.xml
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.AI.WindowsServer.xml
 C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Microsoft.ApplicationInsights.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Castle.Core.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Castle.Windsor.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Castle.Core.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories\bin\Castle.Windsor.xml
