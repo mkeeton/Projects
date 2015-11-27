@@ -22,5 +22,6 @@ namespace IcedMemories.Installers
               .UsingFactoryMethod(k => IcedMemories.Infrastructure.UnitOfWorkOle.Create(k.Resolve<IcedMemories.Data.Interfaces.IDbContext>())).LifestylePerWebRequest()
       );
     }
+
   }
 }

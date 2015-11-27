@@ -14,12 +14,12 @@ namespace IcedMemories.App_Start
   public class OwinSettings : IDisposable
   {
 
-    public static OwinSettings Create()
-    {
-      HttpContext.Current.GetOwinContext().Get<IDbContext>().ConnectionString = WebConfigurationManager.ConnectionStrings["AccessConnection"].ConnectionString;
-      HttpContext.Current.GetOwinContext().Get<IUnitOfWork>().DbContext = HttpContext.Current.GetOwinContext().Get<IDbContext>();
-      return new OwinSettings();
-    }
+    //public static OwinSettings Create()
+    //{
+    //  HttpContext.Current.GetOwinContext().Get<IDbContext>().ConnectionString = WebConfigurationManager.ConnectionStrings["AccessConnection"].ConnectionString;
+    //  HttpContext.Current.GetOwinContext().Get<IUnitOfWork>().DbContext = HttpContext.Current.GetOwinContext().Get<IDbContext>();
+    //  return new OwinSettings();
+    //}
 
     public void Dispose()
     {

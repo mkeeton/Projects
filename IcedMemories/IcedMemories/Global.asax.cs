@@ -53,6 +53,10 @@ namespace IcedMemories
           ControllerBuilder.Current.SetControllerFactory(controllerFactory);
         }
 
+        public static IWindsorContainer GetContainer()
+        {
+          return container;
+        }
         //protected void Application_OnAuthenticateRequest(Object src, EventArgs e)
         //{
         //  HttpContext currentContext = HttpContext.Current;

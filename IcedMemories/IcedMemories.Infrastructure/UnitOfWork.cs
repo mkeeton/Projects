@@ -21,26 +21,11 @@ namespace IcedMemories.Infrastructure
     private ISearchCategoryOptionRepository _categoryOptionRepository;
     private ISearchCategorySelectionRepository _categoryOptionSelectionRepository;
 
-    public static IUnitOfWork Create()
+    public static IUnitOfWork Create(IDbContext context)
     {
-      return new UnitOfWork();
+      return new UnitOfWork(context);
     }
 
-    public IDbContext DbContext
-    {
-      get
-      {
-        return _dbContext;
-      }
-      set
-      {
-        _dbContext = value;
-      }
-    }
-
-    public UnitOfWork()
-    {
-    }
 
     public UnitOfWork(IDbContext context)
     {

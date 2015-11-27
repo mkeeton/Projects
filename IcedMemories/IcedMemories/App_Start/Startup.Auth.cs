@@ -6,10 +6,13 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
+using IcedMemories.Data.Interfaces;
 using IcedMemories.Infrastructure.Interfaces;
 using IcedMemories.Infrastructure.Repositories;
 using IcedMemories.Domain.Models;
 using IcedMemories.Infrastructure;
+using System.Web;
+using System.Web.Configuration;
 
 namespace IcedMemories
 {
@@ -18,8 +21,10 @@ namespace IcedMemories
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-
           // Configure the db context and user manager to use a single instance per request
+          //WebConfigurationManager.ConnectionStrings["AccessConnection"].ConnectionString
+          app.CreatePerOwinContext<IDbContext>(() => new IcedMemories.Data.DbContext.DapperAccessDbContext(WebConfigurationManager.ConnectionStrings["AccessConnection"].ConnectionString));
+          app.CreatePerOwinContext<IUnitOfWork>(() => UnitOfWorkOle.Create(HttpContext.Current.GetOwinContext().Get<IDbContext>()));
           app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
           app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
