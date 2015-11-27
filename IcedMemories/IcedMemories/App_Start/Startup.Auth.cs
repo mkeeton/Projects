@@ -20,9 +20,6 @@ namespace IcedMemories
         {
 
           // Configure the db context and user manager to use a single instance per request
-          app.CreatePerOwinContext(DbContext.Create);
-          app.CreatePerOwinContext<IUnitOfWork>(UnitOfWorkOle.Create);
-          app.CreatePerOwinContext<App_Start.OwinSettings>(App_Start.OwinSettings.Create);
           app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
           app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 

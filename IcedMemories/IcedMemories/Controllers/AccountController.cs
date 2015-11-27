@@ -29,19 +29,7 @@ namespace IcedMemories.Controllers
     public AccountController(ApplicationUserManager userManager, IUnitOfWork unitOfWork)
     {
       UserManager = userManager;
-      WorkManager = unitOfWork;
-    }
-
-    public IUnitOfWork WorkManager
-    {
-      get
-      {
-        return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<IUnitOfWork>();
-      }
-      set
-      {
-        _unitOfWork = value;
-      }
+      _unitOfWork = unitOfWork;
     }
 
     public ApplicationUserManager UserManager
@@ -373,8 +361,8 @@ namespace IcedMemories.Controllers
       }
       else
       {
- 
-        var newUser = await WorkManager.UserManager.FindByEmailAsync(loginInfo.Email);
+
+        var newUser = await _unitOfWork.UserManager.FindByEmailAsync(loginInfo.Email);
         bool _found=false;;
         IdentityResult result;
         if(newUser==null)
@@ -471,7 +459,7 @@ namespace IcedMemories.Controllers
         {
           return View("ExternalLoginFailure");
         }
-        var user = await WorkManager.UserManager.FindByEmailAsync(model.Email);
+        var user = await _unitOfWork.UserManager.FindByEmailAsync(model.Email);
         bool _found=false;;
         IdentityResult result;
         if(user==null)

@@ -14,6 +14,7 @@ namespace IcedMemories
 
   public class ApplicationUserManager : UserManager<User, System.Guid>
   {
+
     public ApplicationUserManager(IUserStore<User, System.Guid> store)
       : base(store)
     {

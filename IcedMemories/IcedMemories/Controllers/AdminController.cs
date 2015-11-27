@@ -17,17 +17,10 @@ namespace IcedMemories.Controllers
 
       private IUnitOfWork _unitOfWork;
 
-        public IUnitOfWork WorkManager
-        {
-          get
-          {
-            return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<IUnitOfWork>();
-          }
-          set
-          {
-            _unitOfWork = value;
-          }
-        }
+      public AdminController(IUnitOfWork unitOfWork)
+      {
+        _unitOfWork = unitOfWork;
+      }
 
         // GET: Admin
         public ActionResult Index()
@@ -39,7 +32,7 @@ namespace IcedMemories.Controllers
         public async Task<ActionResult> Cakes()
         {
 
-          return View(Mapper.Map < IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel> > (await WorkManager.CakeManager.GetCakesAsync()));
+          return View(Mapper.Map<IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel>>(await _unitOfWork.CakeManager.GetCakesAsync()));
         }
 
         [HttpGet]
@@ -48,7 +41,7 @@ namespace IcedMemories.Controllers
           Models.CakeViewModel _cake;
           if (id.HasValue == true)
           {
-            _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id.Value));
+            _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await _unitOfWork.CakeManager.LoadAsync(id.Value));
           }
           else
           {
@@ -58,12 +51,12 @@ namespace IcedMemories.Controllers
 
           try
           {
-            _cake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
-            IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
-            IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await WorkManager.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
+            _cake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await _unitOfWork.SearchCategoryManager.GetCategoriesAsync());
+            IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
+            IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await _unitOfWork.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
             foreach (Models.SearchCategorySelection _category in _cake.Categories)
             {
-              _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+              _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
               foreach (IcedMemories.Domain.Models.SearchCategorySelection _selection in _selections)
               {
                 foreach (Models.SearchCategoryOptionSelection _option in _category.Options)
@@ -91,7 +84,7 @@ namespace IcedMemories.Controllers
             Models.CakeViewModel _cake;
             if (id.HasValue == true)
             {
-                _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await WorkManager.CakeManager.LoadAsync(id.Value));
+              _cake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(await _unitOfWork.CakeManager.LoadAsync(id.Value));
             }
             else
             {
@@ -100,13 +93,13 @@ namespace IcedMemories.Controllers
             }
 
           try
-          { 
-          _cake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
-          IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
-          IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await WorkManager.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
+          {
+            _cake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await _unitOfWork.SearchCategoryManager.GetCategoriesAsync());
+            IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
+            IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await _unitOfWork.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
           foreach(Models.SearchCategorySelection _category in _cake.Categories)
           {
-            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
             foreach(IcedMemories.Domain.Models.SearchCategorySelection _selection in _selections)
             {
               foreach(Models.SearchCategoryOptionSelection _option in _category.Options)
@@ -131,7 +124,7 @@ namespace IcedMemories.Controllers
         [HttpPost]
         public async Task<ActionResult> CakeDetails(Models.CakeViewModel model)
         {
-          IcedMemories.Domain.Models.Cake _cake = await WorkManager.CakeManager.LoadAsync(model.Id);
+          IcedMemories.Domain.Models.Cake _cake = await _unitOfWork.CakeManager.LoadAsync(model.Id);
           String _imagePath = "";
           String _imageExtension = "";
           if(_cake == null)
@@ -190,7 +183,7 @@ namespace IcedMemories.Controllers
           else
           {
           }
-          await WorkManager.CakeManager.SaveAsync(_cake);
+          await _unitOfWork.CakeManager.SaveAsync(_cake);
           foreach(Models.SearchCategorySelection _sCat in model.Categories)
           {
             foreach(Models.SearchCategoryOptionSelection _sOption in _sCat.Options)
@@ -202,14 +195,14 @@ namespace IcedMemories.Controllers
                   IcedMemories.Domain.Models.SearchCategorySelection _newSelection = new Domain.Models.SearchCategorySelection();
                   _newSelection.CakeId = _cake.Id;
                   _newSelection.CategoryOptionId = _sOption.Id;
-                  await WorkManager.SearchCategorySelectionManager.SaveAsync(_newSelection);
+                  await _unitOfWork.SearchCategorySelectionManager.SaveAsync(_newSelection);
                 }
               }
               else
               {
                 if(_sOption.SelectionId!=Guid.Empty)
                 {
-                  await WorkManager.SearchCategorySelectionManager.DeleteAsync(_sOption.SelectionId);
+                  await _unitOfWork.SearchCategorySelectionManager.DeleteAsync(_sOption.SelectionId);
                 }
               }
             }
@@ -217,12 +210,12 @@ namespace IcedMemories.Controllers
           Models.CakeViewModel _returnCake = Mapper.Map<IcedMemories.Domain.Models.Cake, Models.CakeViewModel>(_cake);
           try
           {
-            _returnCake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
-            IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
-            IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await WorkManager.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
+            _returnCake.Categories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await _unitOfWork.SearchCategoryManager.GetCategoriesAsync());
+            IList<IcedMemories.Domain.Models.SearchCategoryOption> _selectedOptions = await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsForCakeAsync(_cake.Id);
+            IList<IcedMemories.Domain.Models.SearchCategorySelection> _selections = await _unitOfWork.SearchCategorySelectionManager.GetCategorySelectionsForCakeAsync(_cake.Id);
             foreach (Models.SearchCategorySelection _category in _returnCake.Categories)
             {
-              _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+              _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
               foreach (IcedMemories.Domain.Models.SearchCategorySelection _selection in _selections)
               {
                 foreach (Models.SearchCategoryOptionSelection _option in _category.Options)
@@ -249,10 +242,10 @@ namespace IcedMemories.Controllers
         {
             if(id.HasValue)
             {
-              IcedMemories.Domain.Models.Cake _cake = await WorkManager.CakeManager.LoadAsync(id.Value);
+              IcedMemories.Domain.Models.Cake _cake = await _unitOfWork.CakeManager.LoadAsync(id.Value);
               if(_cake != null)
               {
-                WorkManager.BeginWork();
+                _unitOfWork.BeginWork();
                 try
                 {
                   try
@@ -261,13 +254,13 @@ namespace IcedMemories.Controllers
                   }
                   catch(Exception exImage)
                   { }
-                  await WorkManager.SearchCategorySelectionManager.DeleteForCakeAsync(_cake.Id);
-                  await WorkManager.CakeManager.DeleteAsync(_cake.Id);
-                  WorkManager.CommitWork();
+                  await _unitOfWork.SearchCategorySelectionManager.DeleteForCakeAsync(_cake.Id);
+                  await _unitOfWork.CakeManager.DeleteAsync(_cake.Id);
+                  _unitOfWork.CommitWork();
                 }
                 catch(Exception ex)
                 { 
-                  WorkManager.RollbackWork();
+                  _unitOfWork.RollbackWork();
                 }
                 
                 
@@ -280,7 +273,7 @@ namespace IcedMemories.Controllers
         public async Task<ActionResult> Categories()
         {
 
-          return View(Mapper.Map < IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection> > (await WorkManager.SearchCategoryManager.GetCategoriesAsync()));
+          return View(Mapper.Map < IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection> > (await _unitOfWork.SearchCategoryManager.GetCategoriesAsync()));
         }
 
         [HttpGet]
@@ -289,7 +282,7 @@ namespace IcedMemories.Controllers
           Models.SearchCategorySelection _category;
           if (id.HasValue)
           {
-            _category = Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(await WorkManager.SearchCategoryManager.LoadAsync(id.Value));
+            _category = Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(await _unitOfWork.SearchCategoryManager.LoadAsync(id.Value));
           }
           else
           {
@@ -298,7 +291,7 @@ namespace IcedMemories.Controllers
 
           try
           {
-            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
           }
           catch (Exception ex)
           {
@@ -313,7 +306,7 @@ namespace IcedMemories.Controllers
           Models.SearchCategorySelection _category;
           if(id.HasValue)
           {
-            _category= Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(await WorkManager.SearchCategoryManager.LoadAsync(id.Value));
+            _category= Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(await _unitOfWork.SearchCategoryManager.LoadAsync(id.Value));
           }
           else
           {
@@ -322,7 +315,7 @@ namespace IcedMemories.Controllers
            
           try
           {
-            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+            _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
           }
           catch (Exception ex)
           {
@@ -334,28 +327,28 @@ namespace IcedMemories.Controllers
         [HttpPost]
         public async Task<ActionResult> CategoryDetails(Models.SearchCategorySelection model)
         {
-          IcedMemories.Domain.Models.SearchCategory _category = await WorkManager.SearchCategoryManager.LoadAsync(model.Id);
+          IcedMemories.Domain.Models.SearchCategory _category = await _unitOfWork.SearchCategoryManager.LoadAsync(model.Id);
           if (_category == null)
           {
             _category = new Domain.Models.SearchCategory();
           }
           _category.Name = model.Name;
-          await WorkManager.SearchCategoryManager.SaveAsync(_category);
+          await _unitOfWork.SearchCategoryManager.SaveAsync(_category);
           foreach(Models.SearchCategoryOptionSelection _cOption in model.Options)
           {
-            IcedMemories.Domain.Models.SearchCategoryOption _option = await WorkManager.SearchCategoryOptionManager.LoadAsync(_cOption.Id);
+            IcedMemories.Domain.Models.SearchCategoryOption _option = await _unitOfWork.SearchCategoryOptionManager.LoadAsync(_cOption.Id);
             if(_option==null)
             {
               _option = new IcedMemories.Domain.Models.SearchCategoryOption();  
             }
             _option.CategoryId = _category.Id;
             _option.Name = _cOption.Name;
-            await WorkManager.SearchCategoryOptionManager.SaveAsync(_option);
+            await _unitOfWork.SearchCategoryOptionManager.SaveAsync(_option);
           }
           Models.SearchCategorySelection _returnCategory = Mapper.Map<IcedMemories.Domain.Models.SearchCategory, Models.SearchCategorySelection>(_category);
           try
           { 
-            _returnCategory.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_returnCategory.Id));
+            _returnCategory.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsAsync(_returnCategory.Id));
           }
           catch(Exception ex)
           {

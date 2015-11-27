@@ -16,16 +16,9 @@ namespace IcedMemories.Controllers
 
     private IUnitOfWork _unitOfWork;
 
-    public IUnitOfWork WorkManager
+    public HomeController(IUnitOfWork unitOfWork)
     {
-      get
-      {
-        return _unitOfWork ?? HttpContext.GetOwinContext().GetUserManager<IUnitOfWork>();
-      }
-      set
-      {
-        _unitOfWork = value;
-      }
+      _unitOfWork = unitOfWork;
     }
 
     public ActionResult Index()
@@ -57,10 +50,10 @@ namespace IcedMemories.Controllers
       }
       if(_gallery.SearchCategories==null)
       {
-        _gallery.SearchCategories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await WorkManager.SearchCategoryManager.GetCategoriesAsync());
+        _gallery.SearchCategories = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategory>, IList<Models.SearchCategorySelection>>(await _unitOfWork.SearchCategoryManager.GetCategoriesAsync());
         foreach (Models.SearchCategorySelection _category in _gallery.SearchCategories)
         {
-          _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await WorkManager.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
+          _category.Options = Mapper.Map<IList<IcedMemories.Domain.Models.SearchCategoryOption>, IList<Models.SearchCategoryOptionSelection>>(await _unitOfWork.SearchCategoryOptionManager.GetCategoryOptionsAsync(_category.Id));
         }
       }
       System.Collections.Generic.List<IcedMemories.Domain.Models.SearchCategoryOption> _searchCategoryOptions = new List<IcedMemories.Domain.Models.SearchCategoryOption>();
@@ -79,7 +72,7 @@ namespace IcedMemories.Controllers
           }
         }
       }
-      _gallery.Cakes = Mapper.Map<IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel>>(await WorkManager.CakeManager.GetCakesAsync(_searchCategoryOptions));
+      _gallery.Cakes = Mapper.Map<IList<IcedMemories.Domain.Models.Cake>, IList<Models.CakeViewModel>>(await _unitOfWork.CakeManager.GetCakesAsync(_searchCategoryOptions));
       return View(_gallery);
     }
   }
