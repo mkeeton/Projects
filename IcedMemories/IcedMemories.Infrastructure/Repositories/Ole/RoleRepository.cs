@@ -25,11 +25,6 @@ namespace IcedMemories.Infrastructure.Repositories.Ole
             this.CurrentContext = context;
         }
 
-        public RoleRepository()
-        {
-            this.CurrentContext = DbContext.Create();
-        }
-
         public void Dispose()
         {
 

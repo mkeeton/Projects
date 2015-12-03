@@ -63,23 +63,23 @@ namespace IcedMemories.Installers
               //.UsingFactoryMethod(k => IcedMemories.Infrastructure.UnitOfWorkOle.Create(k.Resolve<IcedMemories.Data.Interfaces.IDbContext>())).LifestylePerWebRequest()
       );
 
-      container.Register(Component.For<ApplicationUserManager>().UsingFactoryMethod((kernel, creationContext) =>
-      {
-        var userManager = new ApplicationUserManager(kernel.Resolve<IcedMemories.Infrastructure.Interfaces.Repositories.IUserRepository<System.Guid>>());
-        userManager.UserValidator = new Microsoft.AspNet.Identity.UserValidator<IcedMemories.Domain.Models.User,System.Guid>(userManager) { AllowOnlyAlphanumericUserNames = false };
-        return userManager;
-      }).LifestylePerWebRequest());
+      //container.Register(Component.For<ApplicationUserManager>().UsingFactoryMethod((kernel, creationContext) =>
+      //{
+      //  var userManager = new ApplicationUserManager(kernel.Resolve<IcedMemories.Infrastructure.Interfaces.Repositories.IUserRepository<System.Guid>>());
+      //  userManager.UserValidator = new Microsoft.AspNet.Identity.UserValidator<IcedMemories.Domain.Models.User,System.Guid>(userManager) { AllowOnlyAlphanumericUserNames = false };
+      //  return userManager;
+      //}).LifestylePerWebRequest());
 
-      container.Register(Component.For<ApplicationRoleManager>().UsingFactoryMethod((kernel, creationContext) =>
-      {
-        var roleManager = new ApplicationRoleManager(kernel.Resolve<IcedMemories.Infrastructure.Interfaces.Repositories.IRoleRepository<System.Guid>>());
-        return roleManager;
-      }).LifestylePerWebRequest());
+      //container.Register(Component.For<ApplicationRoleManager>().UsingFactoryMethod((kernel, creationContext) =>
+      //{
+      //  var roleManager = new ApplicationRoleManager(kernel.Resolve<IcedMemories.Infrastructure.Interfaces.Repositories.IRoleRepository<System.Guid>>());
+      //  return roleManager;
+      //}).LifestylePerWebRequest());
 
-      container.Register(Component.For()
-        .UsingFactoryMethod((kernel, creationContext) =>
-        HttpContext.Current.GetOwinContext().Authentication)
-        .LifestylePerWebRequest());
+      //container.Register(Component.For()
+      //  .UsingFactoryMethod((kernel, creationContext) =>
+      //  HttpContext.Current.GetOwinContext().Authentication)
+      //  .LifestylePerWebRequest());
     }
 
   }

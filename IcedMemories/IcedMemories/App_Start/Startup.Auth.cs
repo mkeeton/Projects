@@ -23,8 +23,8 @@ namespace IcedMemories
         {
           // Configure the db context and user manager to use a single instance per request
           //WebConfigurationManager.ConnectionStrings["AccessConnection"].ConnectionString
-          app.CreatePerOwinContext<IDbContext>(() => new IcedMemories.Data.DbContext.DapperAccessDbContext(WebConfigurationManager.ConnectionStrings["AccessConnection"].ConnectionString));
-          app.CreatePerOwinContext<IUnitOfWork>(() => UnitOfWorkOle.Create(HttpContext.Current.GetOwinContext().Get<IDbContext>()));
+          //app.CreatePerOwinContext<IDbContext>(() => new IcedMemories.Data.DbContext.DapperAccessDbContext(WebConfigurationManager.ConnectionStrings["AccessConnection"].ConnectionString));
+          //app.CreatePerOwinContext<IUnitOfWork>(() => UnitOfWorkOle.Create(HttpContext.Current.GetOwinContext().Get<IDbContext>()));
           app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
           app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 

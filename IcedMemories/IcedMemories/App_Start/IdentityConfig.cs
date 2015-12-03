@@ -30,7 +30,9 @@ namespace IcedMemories
 
     public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
     {
-      var manager = new ApplicationUserManager(context.Get<IUnitOfWork>().UserManager);
+      var repository = MvcApplication.GetContainer().Kernel.Resolve<IcedMemories.Infrastructure.Interfaces.Repositories.IUserRepository<IcedMemories.Domain.Models.User>>();//System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver
+                           // .GetService(typeof(IcedMemories.Infrastructure.Interfaces.Repositories.IUserRepository<IcedMemories.Domain.Models.User>)) as IcedMemories.Infrastructure.Interfaces.Repositories.IUserRepository<IcedMemories.Domain.Models.User>;
+      var manager = new ApplicationUserManager(repository);
       // Configure validation logic for usernames
       manager.UserValidator = new UserValidator<User, System.Guid>(manager)
       {
@@ -85,7 +87,10 @@ namespace IcedMemories
 
     public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
     {
-      var manager = new ApplicationRoleManager(context.Get<IUnitOfWork>().RoleManager);
+      var repository = MvcApplication.GetContainer().Kernel.Resolve<IcedMemories.Infrastructure.Interfaces.Repositories.IRoleRepository<IcedMemories.Domain.Models.Role>>();
+      //var repository = System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver
+      //                      .GetService(typeof(IcedMemories.Infrastructure.Interfaces.Repositories.IRoleRepository<IcedMemories.Domain.Models.Role>)) as IcedMemories.Infrastructure.Interfaces.Repositories.IRoleRepository<IcedMemories.Domain.Models.Role>;
+      var manager = new ApplicationRoleManager(repository);
       // Configure validation logic for usernames
       return manager;
     }
