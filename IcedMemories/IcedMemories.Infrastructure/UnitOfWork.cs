@@ -13,13 +13,6 @@ namespace IcedMemories.Infrastructure
 {
   public class UnitOfWork : IDisposable, IUnitOfWork
   {
-    private IDbContext _dbContext;
-    private IUserRepository<User> _userRepository;
-    private IRoleRepository<Role> _roleRepository;
-    private ICakeRepository _cakeRepository;
-    private ISearchCategoryRepository _categoryRepository;
-    private ISearchCategoryOptionRepository _categoryOptionRepository;
-    private ISearchCategorySelectionRepository _categoryOptionSelectionRepository;
 
     public static IUnitOfWork Create(IDbContext context)
     {
@@ -32,7 +25,7 @@ namespace IcedMemories.Infrastructure
       if (context == null)
         throw new ArgumentNullException("connectionString");
 
-      this._dbContext = context;
+      this.DbContext = context;
     }
 
     //public UnitOfWork()
@@ -45,115 +38,59 @@ namespace IcedMemories.Infrastructure
 
     }
 
+    public IDbContext DbContext
+    {
+        get;set;
+    }
+
     public void BeginWork()
     {
-      _dbContext.BeginTransaction();
+        DbContext.BeginTransaction();
     }
 
     public void CommitWork()
     {
-      _dbContext.CommitTransaction();
+        DbContext.CommitTransaction();
     }
 
     public void RollbackWork()
     {
-      _dbContext.RollbackTransaction();
+        DbContext.RollbackTransaction();
     }
 
     public IUserRepository<User> UserManager
     {
-      get
-      {
-        if (_userRepository == null)
-        {
-          _userRepository = new UserRepository<User>(_dbContext);
-        }
-        return _userRepository;
-      }
-      private set
-      {
-        _userRepository = value;
-      }
+        get;set;
     }
 
     public IRoleRepository<Role> RoleManager
     {
-      get
-      {
-        if (_roleRepository == null)
-        {
-          _roleRepository = new RoleRepository<Role>(_dbContext);
-        }
-        return _roleRepository;
-      }
-      private set
-      {
-        _roleRepository = value;
-      }
+      get;
+      set;
     }
 
     public ICakeRepository CakeManager
     {
-      get
-      {
-        if (_cakeRepository == null)
-        {
-          _cakeRepository = new CakeRepository(_dbContext);
-        }
-        return _cakeRepository;
-      }
-      private set
-      {
-        _cakeRepository = value;
-      }
+      get;
+      set;
     }
 
     public ISearchCategoryRepository SearchCategoryManager
     {
-      get
-      {
-        if (_categoryRepository == null)
-        {
-          _categoryRepository = new SearchCategoryRepository(_dbContext);
-        }
-        return _categoryRepository;
-      }
-      private set
-      {
-        _categoryRepository = value;
-      }
+      get;
+      set;
     }
 
     public ISearchCategoryOptionRepository SearchCategoryOptionManager
     {
-      get
-      {
-        if (_categoryOptionRepository == null)
-        {
-          _categoryOptionRepository = new SearchCategoryOptionRepository(_dbContext);
-        }
-        return _categoryOptionRepository;
-      }
-      private set
-      {
-        _categoryOptionRepository = value;
-      }
+      get;
+      set;
     }
 
     public ISearchCategorySelectionRepository SearchCategorySelectionManager
     {
-      get
-      {
-        if (_categoryOptionSelectionRepository == null)
-        {
-          _categoryOptionSelectionRepository = new SearchCategorySelectionRepository(_dbContext);
-        }
-        return _categoryOptionSelectionRepository;
-      }
-      private set
-      {
-        _categoryOptionSelectionRepository = value;
-      }
+      get;
+      set;
     }
 
   }

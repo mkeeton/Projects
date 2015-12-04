@@ -58,7 +58,7 @@ namespace IcedMemories.Installers
 
       container.Register(
                 Component.For<IcedMemories.Infrastructure.Interfaces.IUnitOfWork>()
-                .ImplementedBy<IcedMemories.Infrastructure.UnitOfWorkOle>()
+                .ImplementedBy<IcedMemories.Infrastructure.UnitOfWork>()
                 .LifeStyle.PerWebRequest
               //.UsingFactoryMethod(k => IcedMemories.Infrastructure.UnitOfWorkOle.Create(k.Resolve<IcedMemories.Data.Interfaces.IDbContext>())).LifestylePerWebRequest()
       );
