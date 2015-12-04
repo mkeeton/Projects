@@ -68,7 +68,6 @@
     <Compile Include="Repositories\Sql\SearchCategorySelectionRepository.cs" />
     <Compile Include="Repositories\Sql\UserRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="UnitOfWorkOle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IcedMemories.Data\IcedMemories.Data.csproj">
