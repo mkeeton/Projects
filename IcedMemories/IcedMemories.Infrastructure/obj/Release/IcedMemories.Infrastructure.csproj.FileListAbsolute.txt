@@ -1,0 +1,14 @@
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\IcedMemories.Infrastructure.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\IcedMemories.Infrastructure.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\Dapper.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\IcedMemories.Data.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\IcedMemories.Domain.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\Microsoft.AspNet.Identity.Core.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\IcedMemories.Data.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\IcedMemories.Domain.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\Dapper.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\Dapper.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\bin\Release\Microsoft.AspNet.Identity.Core.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\obj\Release\IcedMemories.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\obj\Release\IcedMemories.Infrastructure.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Infrastructure\obj\Release\IcedMemories.Infrastructure.pdb

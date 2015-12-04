@@ -1,0 +1,7 @@
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\bin\Release\IcedMemories.Domain.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\bin\Release\IcedMemories.Domain.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\bin\Release\Microsoft.AspNet.Identity.Core.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\bin\Release\Microsoft.AspNet.Identity.Core.xml
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\obj\Release\IcedMemories.Domain.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\obj\Release\IcedMemories.Domain.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Domain\obj\Release\IcedMemories.Domain.csprojResolveAssemblyReference.cache

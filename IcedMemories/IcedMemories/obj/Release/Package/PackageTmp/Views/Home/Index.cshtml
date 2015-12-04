@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <p class="jumbotron-title">Iced Memories</p>
+</div>
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12" style="text-align:center;">
+            <p>
+                Iced Memories specialises in bespoke cakes for all occasions.
+            </p>
+            <p>
+                From childrens birthday cakes to professional wedding and anniversary cakes, we can produce a cake tailored to you and designed specifically to make your occasion even more special.
+            </p>
+            <p>
+                Iced Memories can produce any type of cake including light and fluffy sponge, rich chocolate and dense fruit cake. Whatever your taste, we can satisfy your hunger.
+            </p>
+            <p>
+              To view a selection of our previous cakes, @Html.ActionLink("click here","Gallery","Home") to visit our gallery.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 m-b-lg">
+          <div class="panel panel-default panel-profile m-b-0">
+            <div class="panel-heading" style="background-image: url(/Images/baking_ingredients.jpg);"></div>
+            <div class="panel-body text-center">
+              <img class="panel-profile-img" src="~/Images/MiniCircleImage.jpg">
+              <h5 class="panel-title">Bespoke Design</h5>
+              <p class="m-b">Each cake is designed from scratch to your specific requirements.</p>
+              <p>@Html.ActionLink("Learn More", "About", "Home", "", "", "BespokeDesign", new { }, new { @class = "btn btn-default" })</p>
+            </div>
+          </div>
+        </div>
+
+      <div class="col-md-4 m-b-lg">
+        <div class="panel panel-default panel-profile m-b-0">
+          <div class="panel-heading" style="background-image: url(/Images/baking_ingredients.jpg);"></div>
+          <div class="panel-body text-center">
+            <img class="panel-profile-img" src="~/Images/MiniCircleImage.jpg">
+            <h5 class="panel-title">Made To Order</h5>
+            <p class="m-b">Each cake is made as and when it is needed, meaning that they are always fresh and beautifully moist.</p>
+            <p>@Html.ActionLink("Learn More", "About", "Home", "", "", "MadeToOrder", new { }, new { @class = "btn btn-default" })</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 m-b-lg">
+        <div class="panel panel-default panel-profile m-b-0">
+          <div class="panel-heading" style="background-image: url(/Images/baking_ingredients.jpg);"></div>
+          <div class="panel-body text-center">
+            <img class="panel-profile-img" src="~/Images/MiniCircleImage.jpg">
+            <h5 class="panel-title">The Sweet Touch</h5>
+            <p class="m-b">Bespoke decorations and sugarwork are hand crafted and lovingly decorated.</p>
+            <p>@Html.ActionLink("Learn More", "About", "Home", "", "", "SweetTouch", new { }, new { @class = "btn btn-default" })</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>

@@ -1,0 +1,9 @@
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\bin\Release\ISSolutions.Domain.dll
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\bin\Release\ISSolutions.Domain.pdb
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\bin\Release\Microsoft.Practices.Unity.Configuration.dll
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\bin\Release\Microsoft.Practices.Unity.dll
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\bin\Release\Microsoft.Practices.Unity.xml
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\bin\Release\Microsoft.Practices.Unity.Configuration.xml
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\obj\Release\ISSolutions.Domain.dll
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\obj\Release\ISSolutions.Domain.pdb
+C:\Development\Applications\C\ISSolutions\ISSolutions.Domain\obj\Release\ISSolutions.Domain.csprojResolveAssemblyReference.cache

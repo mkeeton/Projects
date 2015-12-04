@@ -1,0 +1,75 @@
+﻿@using IcedMemories.Helpers
+@model IcedMemories.Models.SearchCategorySelection
+
+<script type="text/javascript">
+  $(function () {
+    $('#CategoryDetails').submit(function (e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      $.ajax({
+        url: '/Admin/CategoryDetails',
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        enctype: 'multipart/form-data',
+        data: formData,
+        success: function (data) {
+          $(location).attr('href', '/Admin/Categories')
+        }
+      });
+    });
+
+    $("#addItem").click(function () {
+      $.ajax({
+        url: this.href,
+        cache: false,
+        success: function (html) { $("#editorRows").append(html); }
+      });
+      return false;
+    });
+  });
+</script>
+
+<div class="modal-body">
+  @using (Html.BeginForm("CategoryDetails", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", name = "CategoryDetails", id = "CategoryDetails" }))
+  {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+      <h4>Category</h4>
+      <hr />
+      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+      @Html.HiddenFor(model => model.Id)
+
+      <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+          @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+          @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+      </div>
+      @Html.ActionLink("Add Option", "Add", null, new { id = "addItem" })
+      <ul id="editorRows">
+        @foreach (var item in Model.Options)
+        {
+          Html.RenderPartial("CategoryOptionsPartial", item);
+        }
+      </ul>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+      </div>
+    </div>
+  }
+
+  <div>
+    @Html.ActionLink("Back to List", "Categories")
+  </div>
+
+  @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+  }
+</div>

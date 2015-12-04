@@ -1,0 +1,5 @@
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\bin\Release\IcedMemories.Data.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\bin\Release\IcedMemories.Data.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\obj\Release\IcedMemories.Data.dll
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\obj\Release\IcedMemories.Data.pdb
+C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\obj\Release\IcedMemories.Data.csprojResolveAssemblyReference.cache
