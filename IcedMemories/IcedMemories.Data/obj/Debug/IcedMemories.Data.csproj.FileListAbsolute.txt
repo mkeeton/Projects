@@ -1,5 +1,0 @@
-C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\bin\Debug\IcedMemories.Data.dll
-C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\bin\Debug\IcedMemories.Data.pdb
-C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\obj\Debug\IcedMemories.Data.dll
-C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\obj\Debug\IcedMemories.Data.pdb
-C:\Development\Applications\C\Git\Projects\IcedMemories\IcedMemories.Data\obj\Debug\IcedMemories.Data.csprojResolveAssemblyReference.cache

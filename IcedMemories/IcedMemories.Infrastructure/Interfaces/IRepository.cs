@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IcedMemories.Infrastructure.Interfaces
 {
-    interface IRepository
+    public interface IRepository : IDisposable
     {
     }
 }

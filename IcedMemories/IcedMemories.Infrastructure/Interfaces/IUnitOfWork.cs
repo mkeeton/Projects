@@ -14,11 +14,11 @@ namespace IcedMemories.Infrastructure.Interfaces
         void BeginWork();
         void CommitWork();
         void RollbackWork();
-        IUserRepository<User> UserManager { get; }
-        IRoleRepository<Role> RoleManager { get; }
-        ICakeRepository CakeManager { get; }
-        ISearchCategoryRepository SearchCategoryManager { get; }
-        ISearchCategoryOptionRepository SearchCategoryOptionManager { get; }
-        ISearchCategorySelectionRepository SearchCategorySelectionManager { get; }
+        IUserRepository<User> UserManager { get; set;}
+        IRoleRepository<Role> RoleManager { get; set; }
+        ICakeRepository CakeManager { get; set; }
+        ISearchCategoryRepository SearchCategoryManager { get; set; }
+        ISearchCategoryOptionRepository SearchCategoryOptionManager { get; set; }
+        ISearchCategorySelectionRepository SearchCategorySelectionManager { get; set; }
     }
 }
