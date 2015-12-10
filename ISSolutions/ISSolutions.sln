@@ -15,17 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{981CBD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSolutions.Web", "ISSolutions.Web\ISSolutions.Web.csproj", "{6B9AE772-B7A2-42D8-9C10-2D55F7F1E536}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSolutions.Home", "ISSolutions.Home\ISSolutions.Home.csproj", "{44DA4532-0484-4137-910E-C5C93147FD42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.ISSolutions.Infrastructure", "Authentication.ISSolutions.Infrastructure\Authentication.ISSolutions.Infrastructure.csproj", "{071377FD-8E0C-4530-839D-8D5F4297B36B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.ISSolutions.Domain", "Authentication.ISSolutions.Domain\Authentication.ISSolutions.Domain.csproj", "{AEE8B3A7-5BBF-40A5-BF78-BC800BBB3DF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSolutions.Core.Data", "ISSolutions.Core.Data\ISSolutions.Core.Data.csproj", "{21545925-5B8D-43D0-9FB4-B4D10B2C80BE}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://issolutions.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = ISSolutions.Web\\ISSolutions.Web.csproj
-		SccProjectName0 = ISSolutions.Web
-		SccAuxPath0 = https://issolutions.visualstudio.com/defaultcollection
-		SccLocalPath0 = ISSolutions.Web
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -51,6 +49,22 @@ Global
 		{6B9AE772-B7A2-42D8-9C10-2D55F7F1E536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B9AE772-B7A2-42D8-9C10-2D55F7F1E536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B9AE772-B7A2-42D8-9C10-2D55F7F1E536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44DA4532-0484-4137-910E-C5C93147FD42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44DA4532-0484-4137-910E-C5C93147FD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44DA4532-0484-4137-910E-C5C93147FD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44DA4532-0484-4137-910E-C5C93147FD42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071377FD-8E0C-4530-839D-8D5F4297B36B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071377FD-8E0C-4530-839D-8D5F4297B36B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071377FD-8E0C-4530-839D-8D5F4297B36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071377FD-8E0C-4530-839D-8D5F4297B36B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEE8B3A7-5BBF-40A5-BF78-BC800BBB3DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE8B3A7-5BBF-40A5-BF78-BC800BBB3DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE8B3A7-5BBF-40A5-BF78-BC800BBB3DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE8B3A7-5BBF-40A5-BF78-BC800BBB3DF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21545925-5B8D-43D0-9FB4-B4D10B2C80BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21545925-5B8D-43D0-9FB4-B4D10B2C80BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21545925-5B8D-43D0-9FB4-B4D10B2C80BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21545925-5B8D-43D0-9FB4-B4D10B2C80BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
