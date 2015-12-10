@@ -22,6 +22,6 @@ C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\bin\De
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\bin\Debug\Microsoft.Practices.Unity.xml
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
-C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\obj\Debug\ISSolutions.Domain.csprojResolveAssemblyReference.cache
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\obj\Debug\ISSolutions.Domain.dll
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\obj\Debug\ISSolutions.Domain.pdb
+C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Domain\obj\Debug\ISSolutions.Domain.csprojResolveAssemblyReference.cache

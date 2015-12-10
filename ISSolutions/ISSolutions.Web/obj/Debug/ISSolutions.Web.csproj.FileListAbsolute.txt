@@ -59,6 +59,6 @@ C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\bin\Syste
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\bin\System.Web.WebPages.Deployment.xml
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\bin\System.Web.WebPages.Razor.xml
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\bin\System.Web.Optimization.xml
-C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\obj\Debug\ISSolutions.Web.csprojResolveAssemblyReference.cache
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\obj\Debug\ISSolutions.Web.dll
 C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\obj\Debug\ISSolutions.Web.pdb
+C:\Development\Applications\C\Git\Projects\ISSolutions\ISSolutions.Web\obj\Debug\ISSolutions.Web.csprojResolveAssemblyReference.cache

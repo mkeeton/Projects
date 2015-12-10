@@ -184,6 +184,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IOC\CastleWindsor\Factories\WindsorControllerFactory.cs" />
+    <Compile Include="IOC\CastleWindsor\Factories\WindsorHttpControllerActivator.cs" />
+    <Compile Include="IOC\CastleWindsor\Installers\ControllersInstaller.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -191,6 +194,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carousel.css" />
@@ -224,6 +229,8 @@
     <Content Include="Images\SiteImage2.psd" />
     <Content Include="Images\SiteImage3.psd" />
     <Content Include="Images\TopBar.psd" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -285,6 +292,28 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Authentication.ISSolutions.Domain\Authentication.ISSolutions.Domain.csproj">
+      <Project>{aee8b3a7-5bbf-40a5-bf78-bc800bbb3df6}</Project>
+      <Name>Authentication.ISSolutions.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Authentication.ISSolutions.Infrastructure\Authentication.ISSolutions.Infrastructure.csproj">
+      <Project>{071377fd-8e0c-4530-839d-8d5f4297b36b}</Project>
+      <Name>Authentication.ISSolutions.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ISSolutions.Core.Data\ISSolutions.Core.Data.csproj">
+      <Project>{21545925-5b8d-43d0-9fb4-b4d10b2c80be}</Project>
+      <Name>ISSolutions.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ISSolutions.Core.Domain\ISSolutions.Core.Domain.csproj">
+      <Project>{95b2bea1-6aa3-43e3-9503-ec7783f99960}</Project>
+      <Name>ISSolutions.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ISSolutions.Core.Infrastructure\ISSolutions.Core.Infrastructure.csproj">
+      <Project>{7c1c613b-35df-4841-8b4b-58da66383eaa}</Project>
+      <Name>ISSolutions.Core.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
