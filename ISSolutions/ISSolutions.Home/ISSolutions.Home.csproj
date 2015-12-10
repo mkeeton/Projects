@@ -193,13 +193,39 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\carousel.css" />
+    <Content Include="Content\sticky-footer-navbar.css" />
+    <Content Include="Content\WebGrid.css" />
+    <Content Include="Content\WebTab.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\alleBrowser.jpg" />
+    <Content Include="Images\AltHeader.jpg" />
+    <Content Include="Images\AltHeader2.jpg" />
+    <Content Include="Images\CustomerImage.jpg" />
+    <Content Include="Images\HeaderTitle.png" />
+    <Content Include="Images\HeaderTitle2.png" />
+    <Content Include="Images\HeaderTitle3.png" />
+    <Content Include="Images\KCIU8RWM09.jpg" />
+    <Content Include="Images\LaptopImage.jpg" />
+    <Content Include="Images\Mobile.jpg" />
+    <Content Include="Images\Office.jpg" />
+    <Content Include="Images\PHE63L27S6.jpg" />
+    <Content Include="Images\TabletImage1.jpg" />
+    <Content Include="Images\TabletImage2.jpg" />
+    <Content Include="Images\TabletImage3.jpg" />
+    <Content Include="Images\trg-room-blinds.jpg" />
+    <Content Include="Images\Web.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Images\SiteImage.psd" />
+    <Content Include="Images\SiteImage2.psd" />
+    <Content Include="Images\SiteImage3.psd" />
+    <Content Include="Images\TopBar.psd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -210,6 +236,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\WebGrid.js" />
+    <Content Include="Scripts\WebTab.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -246,6 +274,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_AdditionalLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

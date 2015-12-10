@@ -9,16 +9,61 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
 }
+
+.AltPageHead{
+  background-image:url('/Images/AltHeader2.jpg');
+  background-repeat:no-repeat;
+  background-position-y:top;
+}
+
+.container {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container .withPadding {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.navbar-brand {
+color: #ffffff; /* Old browsers */
+color: -moz-linear-gradient(top,  #ffffff 0%, #ffffff 50%, #7d7d7d 75%, #000000 100%); /* FF3.6+ */
+color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#ffffff), color-stop(75%,#7d7d7d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+color: -webkit-linear-gradient(top,  #ffffff 0%,#ffffff 50%,#7d7d7d 75%,#000000 100%); /* Chrome10+,Safari5.1+ */
+color: -o-linear-gradient(top,  #ffffff 0%,#ffffff 50%,#7d7d7d 75%,#000000 100%); /* Opera 11.10+ */
+color: -ms-linear-gradient(top,  #ffffff 0%,#ffffff 50%,#7d7d7d 75%,#000000 100%); /* IE10+ */
+color: linear-gradient(to bottom,  #ffffff 0%,#ffffff 50%,#7d7d7d 75%,#000000 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+font-style:italic;
+font-weight: bold;
+}
+/*.navbar{
+background-color:#BCC6CC;
+color:#FFFFFF;
+}
+*/
